@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html class="html" id="html" lang="en">
+  <head>
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
+    <link
+      class="favicon"
+      href="favicon.ico"
+      id="favicon"
+      rel="shortcut icon"
+      type="image/x-icon"
+    />
+    <link href="styles.css" rel="stylesheet" />
+    <meta charset="UTF-8" />
+    <meta content="IE=edge" http-equiv="X-UA-Compatible" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title class="title" id="title">Fire Grass Water</title>
+  </head>
+  <body class="body" id="body">
+    <header class="header" id="header">
+      <h1 class="header-title" id="header-title">
+        <span class="header-title-text" id="fire-title-text">
+          <a
+            class="github-repository-container"
+            id="github-repository-container"
+            href="https://drewross140.github.io/Rock-Paper-Scissors/"
+            rel="noopener"
+            target="_blank"
+          >
+            <span class="fire-title-letters" id="fire-title-f-letter">F</span>
+            <span class="fire-title-letters" id="fire-title-i-letter">I</span>
+            <span class="fire-title-re-letters" id="fire-title-re-letters"
+              >RE</span
+            ></a
+          >
+        </span>
+        <span class="header-title-text" id="grass-title-text">
+          <a
+            class="header-github-repository-container"
+            id="header-github-repository-container"
+            href="https://drewross140.github.io/Rock-Paper-Scissors/"
+            rel="noopener"
+            target="_blank"
+            >GRASS</a
+          >
+        </span>
+        <span class="header-title-text" id="water-title-text">
+          <a
+            class="header-github-repository-container"
+            id="header-github-repository-container"
+            href="https://drewross140.github.io/Rock-Paper-Scissors/"
+            rel="noopener"
+            target="_blank"
+          >
+            WATER
+          </a>
+        </span>
+      </h1>
+    </header>
+    <main class="main" id="main">
+      <div class="buttons" id="buttons">
+        <div class="button-container" id="fire-button-container">
+          <div class="button" id="fire-button">
+            <img
+              alt="Fire"
+              class="pokémon-sprites"
+              id="charmander-sprite"
+              src="charmander.png"
+            />
+          </div>
+          <h2 class="button-text" id="fire-button-text">CHARMANDER</h2>
+        </div>
+        <div class="button-container" id="grass-button-container">
+          <div class="button" id="grass-button">
+            <img
+              alt="Grass"
+              class="pokémon-sprites"
+              id="bulbasaur-sprite"
+              src="bulbasaur.png"
+            />
+          </div>
+          <h2 class="button-text" id="grass-button-text">BULBASAUR</h2>
+        </div>
+        <div class="button-container" id="water-button-container">
+          <div class="button" id="water-button">
+            <img
+              alt="Water"
+              class="pokémon-sprites"
+              id="squirtle-sprite"
+              src="squirtle.png"
+            />
+          </div>
+          <h2 class="button-text" id="water-button-text">
+            <span class="water-squi-letters" id="water-squi-letters">
+              <span class="water-squ-letters" id="water-squ-letters">SQU</span>
+              <span class="water-i-letter" id="water-i-letter">I</span>
+            </span>
+            <span class="water-r-letter" id="water-r-letter">R</span>
+            <span class="water-tle-letters" id="water-tle-letters">TLE</span>
+          </h2>
+        </div>
+      </div>
+      <div class="scores" id="scores">
+        <div class="score-container" id="player-score">
+          <h3 class="score-name" id="player-score-name">PLAYER</h3>
+          <h3 class="score-name" id="player-score-number">5</h3>
+        </div>
+        <div class="score-container" id="rival-score">
+          <h3 class="score-name" id="rival-score-name">RIVAL</h3>
+          <h3 class="score-name" id="rival-score-number">5</h3>
+        </div>
+      </div>
+      <div class="round" id="round">
+        <h3 class="player-pokémon" id="player-pokémon"></h3>
+        <h3 class="rival-pokémon" id="rival-pokémon"></h3>
+        <h3 class="player-attack" id="player-attack"></h3>
+        <h3 class="player-effectiveness" id="player-effectiveness"></h3>
+        <h3 class="rival-attack" id="rival-attack"></h3>
+        <h3 class="result" id="result"></h3>
+      </div>
+    </main>
+    <script src="scripts.js" defer></script>
+  </body>
+</html>

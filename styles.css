@@ -1,0 +1,283 @@
+html {
+  color: rgba(255, 255, 255, 1);
+  font-family: "Pokémon DS", Arial, Helvetica, sans-serif;
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+header,
+main,
+.pokémon-sprites {
+  width: 100%;
+}
+
+html,
+body,
+main,
+.pokémon-sprites {
+  height: 100%;
+}
+
+@font-face {
+  font-family: "Pokémon DS";
+  src: url("pokemon-ds-font.ttf") format("truetype");
+}
+
+body {
+  background-attachment: fixed;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(51, 51, 51, 1),
+    rgba(0, 0, 0, 1)
+  );
+}
+
+body,
+main {
+  gap: 32px;
+}
+
+body,
+header,
+main,
+.buttons,
+.button-container,
+.button,
+#water-button-text,
+#water-squi-letters,
+#scores,
+.score-container {
+  display: flex;
+}
+
+body,
+header,
+main,
+.buttons,
+.button-container,
+.button,
+#water-button-text,
+#water-squi-letters,
+#scores,
+.score-container {
+  align-items: center;
+}
+
+body,
+header,
+.buttons,
+.button-container,
+.button,
+#water-button-text,
+#water-squi-letters,
+#scores,
+.score-container {
+  justify-content: center;
+}
+
+body,
+main,
+.button-container,
+.score-container {
+  flex-direction: column;
+}
+
+body,
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+#fire-title-text {
+  width: 0px;
+}
+
+header {
+  padding-top: 12px;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1 {
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
+  font-size: 90px;
+}
+
+#fire-title-text {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(224, 90, 0, 1),
+    0px 2px 0px rgba(204, 82, 0, 1), 0px 3px 0px rgba(184, 73, 0, 1),
+    0px 4px 0px rgba(163, 65, 0, 1), 0px 5px 0px rgba(143, 57, 0, 1),
+    0px 6px 0px rgba(122, 49, 0, 1), 0px 7px 0px rgba(102, 41, 0, 1),
+    0px 8px 0px rgba(82, 33, 0, 1), 0px 9px 0px rgba(61, 24, 0, 1),
+    0px 10px 0px rgba(41, 16, 0, 1), 0px 11px 0px rgba(20, 8, 0, 1);
+}
+
+#fire-title-text,
+#fire-button-text {
+  color: rgba(255, 100, 0, 1);
+}
+
+.fire-title-letters {
+  margin-right: -28px;
+}
+
+#grass-title-text {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 224, 90, 1),
+    0px 2px 0px rgba(0, 204, 82, 1), 0px 3px 0px rgba(0, 184, 73, 1),
+    0px 4px 0px rgba(0, 163, 65, 1), 0px 5px 0px rgba(0, 143, 57, 1),
+    0px 6px 0px rgba(0, 122, 49, 1), 0px 7px 0px rgba(0, 102, 41, 1),
+    0px 8px 0px rgba(0, 82, 33, 1), 0px 9px 0px rgba(0, 61, 24, 1),
+    0px 10px 0px rgba(0, 41, 16, 1), 0px 11px 0px rgba(0, 20, 8, 1);
+}
+
+#grass-title-text,
+#grass-button-text {
+  color: rgba(0, 255, 100, 1);
+}
+
+#water-title-text {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1), 0px 1px 0px rgba(0, 90, 224, 1),
+    0px 2px 0px rgba(0, 82, 204, 1), 0px 3px 0px rgba(0, 73, 184, 1),
+    0px 4px 0px rgba(0, 65, 163, 1), 0px 5px 0px rgba(0, 57, 143, 1),
+    0px 6px 0px rgba(0, 49, 122, 1), 0px 7px 0px rgba(0, 41, 102, 1),
+    0px 8px 0px rgba(0, 33, 82, 1), 0px 9px 0px rgba(0, 24, 61, 1),
+    0px 10px 0px rgba(0, 16, 41, 1), 0px 11px 0px rgba(0, 8, 20, 1);
+}
+
+#water-title-text,
+#water-button-text {
+  color: rgba(0, 100, 255, 1);
+}
+
+.buttons,
+.button-container {
+  gap: 16px;
+}
+
+.button {
+  background-image: radial-gradient(
+    circle at center,
+    rgba(81, 81, 81, 1),
+    rgba(21, 21, 21, 1)
+  );
+  border-color: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 2px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+  height: 225px;
+  padding: 12px;
+  width: 225px;
+}
+
+.button,
+.pokémon-sprites {
+  transition: 0.75s all ease-in-out;
+}
+
+.button {
+  cursor: pointer;
+}
+
+.button:hover {
+  border-width: 2px;
+  box-shadow: none;
+  outline-style: solid;
+  outline-width: 2px;
+  transform: scale(1.03);
+}
+
+.button:hover,
+.pokémon-sprites:hover {
+  filter: brightness(1.2);
+}
+
+#fire-button:hover {
+  border-color: rgba(128, 64, 0, 1);
+  filter: drop-shadow(0px 1px 2px rgba(255, 128, 0, 1));
+  outline-color: rgba(255, 128, 0, 1);
+}
+
+#grass-button:hover {
+  border-color: rgba(0, 128, 64, 1);
+  filter: drop-shadow(0px 1px 2px rgba(0, 255, 128, 1));
+  outline-color: rgba(0, 255, 128, 1);
+}
+
+#water-button:hover {
+  border-color: rgba(0, 64, 128, 1);
+  filter: drop-shadow(0px 1px 2px rgba(0, 128, 255, 1));
+  outline-color: rgba(0, 128, 255, 1);
+}
+
+.pokémon-sprites {
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));
+}
+
+.pokémon-sprites:hover {
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 1));
+}
+
+h2 {
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));
+  font-size: 56px;
+}
+
+#fire-button-text {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 3px 0px rgba(143, 57, 0, 1),
+    0px 6px 0px rgba(122, 49, 0, 1), 0px 9px 0px rgba(61, 24, 0, 1),
+    0px 12px 0px rgba(41, 16, 0, 1);
+}
+
+#grass-button-text {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 3px 0px rgba(0, 143, 57, 1),
+    0px 6px 0px rgba(0, 122, 49, 1), 0px 9px 0px rgba(0, 61, 24, 1),
+    0px 12px 0px rgba(0, 41, 16, 1);
+}
+
+#water-button-text {
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 3px 0px rgba(0, 58, 143, 1),
+    0px 6px 0px rgba(0, 49, 122, 1), 0px 9px 0px rgba(0, 24, 61, 1),
+    0px 12px 0px rgba(0, 16, 41, 1);
+}
+
+#water-squ-letters {
+  margin-right: -3px;
+}
+
+#water-squi-letters {
+  margin-right: -3px;
+}
+
+#scores {
+  gap: 64px;
+  text-align: center;
+}
+
+.score-container {
+  gap: 8px;
+}
+
+#player-score {
+  color: rgb(100, 100, 255);
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3), 0px 2px 0px rgba(75, 75, 191, 1),
+    0px 4px 0px rgba(50, 50, 128, 1), 0px 6px 0px rgba(25, 25, 64, 1),
+    0px 8px 0px rgba(13, 13, 32, 1);
+}
+
+h3 {
+  filter: drop-shadow(0px 1px 1px rgba(0, 0, 0, 1));
+  font-size: 48px;
+}
+
+#rival-score {
+  color: rgb(255, 100, 100);
+  text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.3), 0px 2px 0px rgba(191, 75, 75, 1),
+    0px 4px 0px rgba(128, 50, 50, 1), 0px 6px 0px rgba(64, 25, 25, 1),
+    0px 8px 0px rgba(32, 13, 13, 1);
+}

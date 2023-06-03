@@ -19,29 +19,31 @@
     <div class="overlay active" id="overlay">
       <div class="menu" id="name-menu">
         <h1 class="menu-title" id="name-title">ENTER PLAYER NAMES</h1>
-        <div class="name-inputs" id="name-inputs">
-          <input
-            class="name-input"
-            id="player-name-input"
-            maxlength="16"
-            minlength="1"
-            placeholder="PLAYER NAME"
-            required
-          />
-          <input
-            class="name-input"
-            id="rival-name-input"
-            maxlength="16"
-            minlength="1"
-            placeholder="RIVAL NAME"
-            required
-          />
-        </div>
-        <button class="menu-button" id="continue-button">
-          <span id="continue-cont-letters">CONT</span>
-          <span id="continue-i-letter">I</span>
-          <span id="continue-nue-letters">NUE</span>
-        </button>
+        <form class="name-form" id="name-form">
+          <div class="name-inputs" id="name-inputs">
+            <input
+              class="name-input"
+              id="player-name-input"
+              maxlength="16"
+              minlength="1"
+              placeholder="PLAYER NAME"
+              required
+            />
+            <input
+              class="name-input"
+              id="rival-name-input"
+              maxlength="16"
+              minlength="1"
+              placeholder="RIVAL NAME"
+              required
+            />
+          </div>
+          <button class="menu-button" id="continue-button" type="submit">
+            <span id="continue-cont-letters">CONT</span>
+            <span id="continue-i-letter">I</span>
+            <span id="continue-nue-letters">NUE</span>
+          </button>
+        </form>
       </div>
       <div class="menu hidden" id="post-game-menu">
         <div class="close-button-container" id="close-button-container">
@@ -57,16 +59,16 @@
           </svg>
         </div>
         <h1 class="menu-title" id="menu-title">
-          <span class="menu-title-player-name" id="menu-title-player-name"
+          <span class="post-game-player-name" id="post-game-player-name"
             >PLAYER</span
           >
-          <span class="menu-title-result-text" id="menu-title-result-text"
+          <span class="post-game-menu-result" id="post-game-menu-result"
             >RESULT</span
           >
-          <span class="menu-title-versus-text" id="menu-title-versus-text"
+          <span class="post-game-menu-versus" id="post-game-menu-versus"
             >VERSUS</span
           >
-          <span class="menu-title-rival-name" id="menu-title-rival-name"
+          <span class="post-game-rival-name" id="post-game-rival-name"
             >RIVAL!</span
           >
         </h1>
@@ -159,13 +161,13 @@
         </div>
       </div>
       <div class="scores" id="scores">
-        <div class="score-container" id="player-score">
-          <h3 class="score-name" id="player-score-name">PLAYER</h3>
-          <h3 class="score-name" id="player-score-number">5</h3>
+        <div class="score-container" id="score-player">
+          <h3 class="score-name" id="score-player-name">PLAYER</h3>
+          <h3 class="score-name" id="score-player-number">5</h3>
         </div>
-        <div class="score-container" id="rival-score">
-          <h3 class="score-name" id="rival-score-name">RIVAL</h3>
-          <h3 class="score-name" id="rival-score-number">5</h3>
+        <div class="score-container" id="score-rival">
+          <h3 class="score-name" id="score-rival-name">RIVAL</h3>
+          <h3 class="score-name" id="score-rival-number">5</h3>
         </div>
       </div>
       <div class="round" id="round">

@@ -15,6 +15,12 @@ const elementIDs = [
   "rival-attack-rival-name",
   "result-player-name",
   "result-rival-name",
+  "player-pokémon-pokémon-name",
+  "player-attack-pokémon-name",
+  "result-player-pokémon-name",
+  "rival-pokémon-pokémon-name",
+  "rival-attack-pokémon-name",
+  "result-rival-pokémon-name",
 ];
 
 // Reduce function is used to create a new JavaScript element, where each key is the element's ID, and each value is the corresponding DOM object.
@@ -74,6 +80,22 @@ const rivalNameElements = {
   "rival-name-elements-with-apostrophe": [
     elements["rival-attack-rival-name"],
     elements["result-rival-name"],
+  ],
+};
+
+const playerPokémonElements = {
+  "player-pokémon-elements": [
+    elements["player-pokémon-pokémon-name"],
+    elements["player-attack-pokémon-name"],
+    elements["result-player-pokémon-name"],
+  ],
+};
+
+const rivalPokémonElements = {
+  "rival-pokémon-elements": [
+    elements["rival-pokémon-pokémon-name"],
+    elements["rival-attack-pokémon-name"],
+    elements["result-rival-pokémon-name"],
   ],
 };
 
@@ -137,10 +159,22 @@ function assignTextContent(elements, name) {
         // Else if the element should have a "'s", or "'" appended.
       } else if (key.includes("with-apostrophe")) {
         element.textContent = name.endsWith("s") ? `${name}'` : `${name}'s`;
-        // Else if the element should display the player name normally.
+        // Else the element should display the player name normally.
       } else {
         element.textContent = name;
       }
+    });
+  });
+}
+
+// Function to set Pokémon names to their respective elements.
+function assignPokemonNames(pokemonElements, pokemonName) {
+  // For each group of Pokémon elements.
+  Object.keys(pokemonElements).forEach((key) => {
+    // For each element in the group.
+    pokemonElements[key].forEach((element) => {
+      // Set the Pokémon name.
+      element.textContent = pokemonName;
     });
   });
 }
@@ -150,7 +184,11 @@ function handleButtonClick(buttonID) {
   const button = document.getElementById(buttonID);
   button.addEventListener("click", function () {
     const playerChoice = button.querySelector("img").alt;
-    const playerPokémon = pokémon[playerChoice];
+    playerPokémon = pokémon[playerChoice];
+    assignPokemonNames(playerPokémonElements, playerPokémon);
+    rivalChoice = retrieveRandomItem(choices);
+    rivalPokémon = pokémon[rivalChoice];
+    assignPokemonNames(rivalPokémonElements, rivalPokémon);
     const playerAttack = retrieveRandomItem(pokémonAttacks[playerChoice]);
     console.log(`Player Choice: ${playerChoice}`);
     console.log(`Player Pokémon: ${playerPokémon}`);

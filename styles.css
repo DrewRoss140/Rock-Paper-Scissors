@@ -371,7 +371,9 @@ a {
 }
 
 #fire-title-text,
-#fire-button-text {
+#fire-button-text,
+.player-pokémon-name.charmander,
+.rival-pokémon-name.charmander {
   color: rgba(255, 100, 0, 1);
 }
 
@@ -389,7 +391,9 @@ a {
 }
 
 #grass-title-text,
-#grass-button-text {
+#grass-button-text,
+.player-pokémon-name.bulbasaur,
+.rival-pokémon-name.bulbasaur {
   color: rgba(0, 255, 100, 1);
 }
 
@@ -403,7 +407,9 @@ a {
 }
 
 #water-title-text,
-#water-button-text {
+#water-button-text,
+.player-pokémon-name.squirtle,
+.rival-pokémon-name.squirtle {
   color: rgba(0, 100, 255, 1);
 }
 
@@ -508,4 +514,27 @@ h2,
 .pre-effectiveness-text,
 .versus-text {
   font-weight: 599;
+}
+
+.player-pokémon-attack.charmander,
+.rival-pokémon-attack.charmander {
+  color: rgba(219, 163, 128, 1);
+}
+
+.player-pokémon-attack.bulbasaur,
+.rival-pokémon-attack.bulbasaur {
+  color: rgba(163, 219, 128, 1);
+}
+
+.player-pokémon-attack.squirtle,
+.rival-pokémon-attack.squirtle {
+  color: rgba(128, 163, 219, 1);
+}
+
+.round-result.won {
+  color: rgba(0, 255, 0, 1);
+}
+
+.round-result.lost {
+  color: rgba(255, 0, 0, 1);
 }

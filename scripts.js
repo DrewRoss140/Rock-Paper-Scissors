@@ -1,37 +1,54 @@
-// Define element IDs to be referenced.
-const elementIDs = [
-  "overlay",
-  "name-menu",
-  "name-form",
-  "player-name-input",
-  "rival-name-input",
-  "post-game-player-name",
-  "post-game-rival-name",
-  "score-player-name",
-  "score-rival-name",
-  "player-pokémon-player-name",
-  "rival-pokémon-rival-name",
-  "player-attack-player-name",
-  "rival-attack-rival-name",
-  "result-player-name",
-  "result-rival-name",
-  "player-pokémon-pokémon-name",
-  "player-attack-pokémon-name",
-  "result-player-pokémon-name",
-  "rival-pokémon-pokémon-name",
-  "rival-attack-pokémon-name",
-  "result-rival-pokémon-name",
-];
+// DOM Elements.
+const overlay = document.getElementById("overlay");
+const nameMenu = document.getElementById("name-menu");
+const nameForm = document.getElementById("name-form");
+const playerNameInput = document.getElementById("player-name-input");
+const rivalNameInput = document.getElementById("rival-name-input");
+const postGamePlayerName = document.getElementById("post-game-player-name");
+const postGameRivalName = document.getElementById("post-game-rival-name");
+const scorePlayerName = document.getElementById("score-player-name");
+const scoreRivalName = document.getElementById("score-rival-name");
+const playerPokémonPlayerName = document.getElementById(
+  "player-pokémon-player-name"
+);
+const playerPokémonPokémonName = document.getElementById(
+  "player-pokémon-pokémon-name"
+);
+const rivalPokémonRivalName = document.getElementById(
+  "rival-pokémon-rival-name"
+);
+const rivalPokémonPokémonName = document.getElementById(
+  "rival-pokémon-pokémon-name"
+);
+const playerAttackPlayerName = document.getElementById(
+  "player-attack-player-name"
+);
+const playerAttackPokémonName = document.getElementById(
+  "player-attack-pokémon-name"
+);
+const playerAttackPlayerPokémonAttack = document.getElementById(
+  "player-attack-player-pokémon-attack"
+);
+const rivalAttackRivalName = document.getElementById("rival-attack-rival-name");
+const rivalAttackPokémonName = document.getElementById(
+  "rival-attack-pokémon-name"
+);
+const rivalAttackRivalPokémonAttack = document.getElementById(
+  "rival-attack-rival-pokémon-attack"
+);
+const resultPlayerName = document.getElementById("result-player-name");
+4;
+const resultPlayerPokémonName = document.getElementById(
+  "result-player-pokémon-name"
+);
+const resultRivalName = document.getElementById("result-rival-name");
+const resultRivalPokémonName = document.getElementById(
+  "result-rival-pokémon-name"
+);
 
-// Reduce function is used to create a new JavaScript element, where each key is the element's ID, and each value is the corresponding DOM object.
-const elements = elementIDs.reduce((element, id) => {
-  element[id] = document.getElementById(id);
-  return element;
-}, {});
+// Data Structures.
 
 const buttons = ["fire-button", "grass-button", "water-button"];
-
-const choices = ["Fire", "Grass", "Water"];
 
 const pokémon = {
   Fire: "CHARMANDER",
@@ -39,10 +56,69 @@ const pokémon = {
   Water: "SQUIRTLE",
 };
 
+const choices = ["Fire", "Grass", "Water"];
+
 const pokémonAttacks = {
-  Fire: ["EMBER", "FLAME THROWER"],
-  Grass: ["RAZOR LEAF", "VINE WHIP"],
-  Water: ["BUBBLE", "HYDRO PUMP", "WATER GUN"],
+  Fire: [
+    "EMBER",
+    "FIRE FANG",
+    "FIRE SPIN",
+    "FLAMETHROWER",
+    "FLARE BLITZ",
+    "INFERNO",
+  ],
+  Grass: [
+    "LEECH SEED",
+    "PETAL BLIZZARD",
+    "PETAL DANCE",
+    "RAZOR LEAF",
+    "SEED BOMB",
+    "VINE WHIP",
+  ],
+  Water: [
+    "AQUA TAIL",
+    "BUBBLE",
+    "HYDRO PUMP",
+    "RAIN DANCE",
+    "SHELL SMASH",
+    "WATER GUN",
+    "WATER PULSE",
+  ],
+};
+
+const playerNameElements = {
+  "player-name-elements": [
+    postGamePlayerName,
+    scorePlayerName,
+    resultPlayerName,
+  ],
+  "player-name-elements-with-colon": [playerPokémonPlayerName],
+  "player-name-elements-with-apostrophe": [
+    playerAttackPlayerName,
+    resultPlayerName,
+  ],
+};
+
+const rivalNameElements = {
+  "rival-name-elements": [postGameRivalName, scoreRivalName, resultRivalName],
+  "rival-name-elements-with-colon": [rivalPokémonRivalName],
+  "rival-name-elements-with-apostrophe": [
+    rivalAttackRivalName,
+    resultRivalName,
+  ],
+};
+
+const playerPokémonNameElements = {
+  "player-pokémon-elements": [playerAttackPokémonName, resultPlayerPokémonName],
+  "player-pokémon-elements-with-exclamation": [playerPokémonPokémonName],
+};
+
+const rivalPokémonNameElements = {
+  "rival-pokémon-elements": [rivalAttackPokémonName],
+  "rival-pokémon-elements-with-exclamation": [
+    rivalPokémonPokémonName,
+    resultRivalPokémonName,
+  ],
 };
 
 const pokémonAttackEffectiveness = {
@@ -53,52 +129,11 @@ const pokémonAttackEffectiveness = {
 
 const roundResults = ["Draw", "Lose", "Win"];
 
-// Group player, and rival, name elements based on their context.
-const playerNameElements = {
-  // Elements where the player name is displayed normally.
-  "player-name-elements": [
-    elements["post-game-player-name"],
-    elements["score-player-name"],
-    elements["result-player-name"],
-  ],
-  // Elements where the player name is displayed with a trailing ":".
-  "player-name-elements-with-colon": [elements["player-pokémon-player-name"]],
-  // EElements where the player name is displayed with a trailing "'s", or "'", depending on last character.
-  "player-name-elements-with-apostrophe": [
-    elements["player-attack-player-name"],
-    elements["result-player-name"],
-  ],
-};
+// Variables.
 
-const rivalNameElements = {
-  "rival-name-elements": [
-    elements["post-game-rival-name"],
-    elements["score-rival-name"],
-    elements["result-rival-name"],
-  ],
-  "rival-name-elements-with-colon": [elements["rival-pokémon-rival-name"]],
-  "rival-name-elements-with-apostrophe": [
-    elements["rival-attack-rival-name"],
-    elements["result-rival-name"],
-  ],
-};
-
-const playerPokémonElements = {
-  "player-pokémon-elements": [
-    elements["player-pokémon-pokémon-name"],
-    elements["player-attack-pokémon-name"],
-    elements["result-player-pokémon-name"],
-  ],
-};
-
-const rivalPokémonElements = {
-  "rival-pokémon-elements": [
-    elements["rival-pokémon-pokémon-name"],
-    elements["rival-attack-pokémon-name"],
-    elements["result-rival-pokémon-name"],
-  ],
-};
-
+let suffix;
+let playerPreviousPokémon;
+let rivalPreviousPokémon;
 let playerChoice;
 let rivalChoice;
 let playerPokémon;
@@ -120,83 +155,109 @@ let totalWinPercent;
 let totalLossPercent;
 let totalDrawPercent;
 
+// Executes on page loading.
 window.onload = function () {
-  elements["name-menu"].classList.add("active");
-  elements["name-form"].addEventListener("submit", function (e) {
+  nameMenu.classList.add("active");
+  nameForm.addEventListener("submit", function (e) {
+    // Prevents page refresh on form submission.
     e.preventDefault();
-    let playerName = elements["player-name-input"].value;
-    let rivalName = elements["rival-name-input"].value;
+    let playerName = playerNameInput.value;
+    let rivalName = rivalNameInput.value;
+    // Validates that both inputs have
     if (playerName && rivalName) {
-      elements["name-menu"].classList.remove("active");
-      elements["name-menu"].classList.add("inactive");
+      nameMenu.classList.replace("active", "inactive");
       setTimeout(function () {
-        elements["name-menu"].classList.replace("inactive", "hidden");
-        elements["overlay"].classList.add("fade-out");
+        nameMenu.classList.replace("inactive", "hidden");
+        overlay.classList.add("fade-out");
       }, 3000);
       setTimeout(function () {
-        elements["overlay"].classList.remove("active", "inactive");
+        overlay.classList.remove("active", "inactive");
       }, 3000);
       setTimeout(function () {
-        elements["overlay"].classList.replace("fade-out", "hidden");
+        overlay.classList.replace("fade-out", "hidden");
       }, 6000);
-      assignTextContent(playerNameElements, playerName);
-      assignTextContent(rivalNameElements, rivalName);
+      assignPlayerNames(playerNameElements, playerName);
+      assignPlayerNames(rivalNameElements, rivalName);
     }
   });
 };
 
 buttons.forEach(handleButtonClick);
 
-// Function to set the text content of elements, based on their group.
-function assignTextContent(elements, name) {
-  // For each group of elements.
+// Assigns inputted player and rival names to their respective DOM elements.
+function assignPlayerNames(elements, name) {
   Object.keys(elements).forEach((key) => {
-    // For each element in the group.
+    suffix = "";
+    // Checks if items in playerNameElements/rivalNameElements are associated to the key "with-colon".
+    if (key.includes("with-colon")) {
+      suffix = ":";
+      // Checks if items in playerNameElements/rivalNameElements are associated to the key "with-apostrophe".
+    } else if (key.includes("with-apostrophe")) {
+      suffix = name.endsWith("s") ? "'" : "'s";
+    }
+    // Assigns inputted names to their respective DOM elements, with the addition of the relevant suffix (if applicable).
     elements[key].forEach((element) => {
-      // If the element should have a ":" appended.
-      if (key.includes("with-colon")) {
-        element.textContent = `${name}:`;
-        // Else if the element should have a "'s", or "'" appended.
-      } else if (key.includes("with-apostrophe")) {
-        element.textContent = name.endsWith("s") ? `${name}'` : `${name}'s`;
-        // Else the element should display the player name normally.
-      } else {
-        element.textContent = name;
+      element.textContent = name + suffix;
+    });
+  });
+}
+
+// Assigns player and rival Pokémon names to their respective DOM elements.
+function assignPokémonNames(pokémonElements, pokémonName, previousPokémon) {
+  Object.keys(pokémonElements).forEach((key) => {
+    suffix = "";
+    if (key.includes("with-exclamation")) {
+      suffix = "!";
+    }
+    // Updates class name of respective element to append selected Pokémon name, for CSS style selection.
+    pokémonElements[key].forEach((element) => {
+      if (previousPokémon) {
+        element.classList.remove(previousPokémon.toLowerCase());
       }
+      element.classList.add(pokémonName.toLowerCase());
+      element.textContent = pokémonName + suffix;
     });
   });
 }
 
-// Function to set Pokémon names to their respective elements.
-function assignPokemonNames(pokemonElements, pokemonName) {
-  // For each group of Pokémon elements.
-  Object.keys(pokemonElements).forEach((key) => {
-    // For each element in the group.
-    pokemonElements[key].forEach((element) => {
-      // Set the Pokémon name.
-      element.textContent = pokemonName;
-    });
-  });
-}
-
-// Function to handle the user clicking buttons.
 function handleButtonClick(buttonID) {
   const button = document.getElementById(buttonID);
   button.addEventListener("click", function () {
     const playerChoice = button.querySelector("img").alt;
+    playerPreviousPokémon = playerPokémon;
     playerPokémon = pokémon[playerChoice];
-    assignPokemonNames(playerPokémonElements, playerPokémon);
+    assignPokémonNames(
+      playerPokémonNameElements,
+      playerPokémon,
+      playerPreviousPokémon
+    );
+    playerPokémonAttack = retrieveRandomItem(pokémonAttacks[playerChoice]);
+    playerAttackPlayerPokémonAttack.textContent = `${playerPokémonAttack}!`;
+    if (playerPreviousPokémon) {
+      playerAttackPlayerPokémonAttack.classList.remove(
+        playerPreviousPokémon.toLowerCase()
+      );
+    }
+    playerAttackPlayerPokémonAttack.classList.add(playerPokémon.toLowerCase());
     rivalChoice = retrieveRandomItem(choices);
+    rivalPreviousPokémon = rivalPokémon;
     rivalPokémon = pokémon[rivalChoice];
-    assignPokemonNames(rivalPokémonElements, rivalPokémon);
-    const playerAttack = retrieveRandomItem(pokémonAttacks[playerChoice]);
-    console.log(`Player Choice: ${playerChoice}`);
-    console.log(`Player Pokémon: ${playerPokémon}`);
-    console.log(`Player Attack: ${playerAttack}`);
+    assignPokémonNames(
+      rivalPokémonNameElements,
+      rivalPokémon,
+      rivalPreviousPokémon
+    );
+    rivalPokémonAttack = retrieveRandomItem(pokémonAttacks[rivalChoice]);
+    rivalAttackRivalPokémonAttack.textContent = `${rivalPokémonAttack}!`;
+    if (rivalPreviousPokémon) {
+      rivalAttackRivalPokémonAttack.classList.remove(
+        rivalPreviousPokémon.toLowerCase()
+      );
+    }
+    rivalAttackRivalPokémonAttack.classList.add(rivalPokémon.toLowerCase());
   });
 }
 
-// Function to return a random item from an array.
 function retrieveRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }

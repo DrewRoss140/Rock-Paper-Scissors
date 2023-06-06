@@ -17,7 +17,7 @@
   </head>
   <body class="body" id="body">
     <div class="overlay active" id="overlay">
-      <div class="menu" id="name-menu">
+      <div class="menu active" id="name-menu">
         <h1 class="menu-title" id="name-title">ENTER PLAYER NAMES</h1>
         <form class="name-form" id="name-form">
           <div class="name-inputs" id="name-inputs">
@@ -58,7 +58,7 @@
             />
           </svg>
         </div>
-        <h1 class="menu-title" id="menu-title">
+        <h1 class="menu-title" id="post-game-title">
           <span class="post-game-player-name" id="post-game-player-name"></span>
           <span class="post-game-menu-result" id="post-game-menu-result"
             >RESULT</span
@@ -68,9 +68,106 @@
           >
           <span class="post-game-rival-name" id="post-game-rival-name"></span>
         </h1>
-        <button class="play-again-button" id="play-again-button">
-          PLAY AGAIN!
-        </button>
+        <div class="stats" id="stats">
+          <div class="stats-section" id="round-stats">
+            <div class="stat" id="rounds-won">
+              <h2 class="stat-text" id="rounds-won-text">
+                ROUNDS
+                <span class="stat-stat-text" id="rounds-won-won-text"
+                  >WON:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="rounds-won-number">5</h2>
+            </div>
+            <div class="stat" id="rounds-lost">
+              <h2 class="stat-text" id="rounds-lost-text">
+                ROUNDS
+                <span class="stat-stat-text" id="rounds-lost-lost-text"
+                  >LOST:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="rounds-lost-number">5</h2>
+            </div>
+            <div class="stat" id="rounds-drawn">
+              <h2 class="stat-text" id="rounds-drawn-text">
+                ROUNDS
+                <span class="stat-stat-text" id="rounds-drawn-draw-text"
+                  >DRAWN:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="rounds-drawn-number">5</h2>
+            </div>
+            <div class="stat" id="critical-hits">
+              <h2 class="stat-text" id="critical-hits-text">CRITICAL HITS:</h2>
+              <h2 class="stat-number" id="critical-hits-number">5</h2>
+            </div>
+          </div>
+          <div class="stats-section" id="percent-stats">
+            <div class="stat" id="win-percent">
+              <h2 class="stat-text" id="win-percent-win-text">WIN%:</h2>
+              <h2 class="stat-number" id="win-percent-number">99%</h2>
+            </div>
+            <div class="stat" id="loss-percent">
+              <h2 class="stat-text" id="loss-percent-loss-text">LOSS%:</h2>
+              <h2 class="stat-number" id="loss-percent-number">99%</h2>
+            </div>
+            <div class="stat" id="draw-percent">
+              <h2 class="stat-text" id="draw-percent-drawn-text">DRAW%:</h2>
+              <h2 class="stat-number" id="draw-percent-number">99%</h2>
+            </div>
+          </div>
+          <div class="stats-section" id="total-stats">
+            <div class="stat" id="total-rounds-played">
+              <h2 class="stat-text" id="total-rounds-played-text">
+                TOTAL ROUNDS
+                <span
+                  class="stat-stat-text"
+                  id="total-rounds-played-played-text"
+                  >PLAYED:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="total-rounds-played-number">5</h2>
+            </div>
+            <div class="stat" id="total-win-percent">
+              <h2 class="stat-text" id="total-win-percent-text">
+                TOTAL
+                <span class="stat-stat-text" id="total-win-percent-win-text"
+                  >WIN%:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="total-win-percent-number">99%</h2>
+            </div>
+            <div class="stat" id="total-loss-percent">
+              <h2 class="stat-text" id="total-loss-percent-text">
+                TOTAL
+                <span class="stat-stat-text" id="total-loss-percent-loss-text"
+                  >LOSS%:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="total-loss-percent-number">99%</h2>
+            </div>
+            <div class="stat" id="total-drawn-percent">
+              <h2 class="stat-text" id="total-drawn-percent-text">
+                TOTAL
+                <span class="stat-stat-text" id="total-drawn-percent-draw-text"
+                  >DRAW%:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="total-draw-percent-number">99%</h2>
+            </div>
+            <div class="stat" id="total-critical-hits">
+              <h2 class="stat-text" id="total-critical-hits-text">
+                TOTAL
+                <span
+                  class="stat-stat-text"
+                  id="total-critical-hits-critical-hits-text"
+                  >CRITICAL HITS:</span
+                >
+              </h2>
+              <h2 class="stat-number" id="total-critical-hits-number">5</h2>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <header class="header" id="header">
@@ -156,7 +253,7 @@
           </h2>
         </div>
       </div>
-      <div class="scores" id="scores">
+      <div class="scores hidden" id="scores">
         <div class="score-container" id="score-player">
           <h3 class="score-name" id="score-player-name"></h3>
           <h3 class="score-name" id="score-player-number">5</h3>
@@ -166,7 +263,7 @@
           <h3 class="score-name" id="score-rival-number">5</h3>
         </div>
       </div>
-      <div class="round" id="round">
+      <div class="round hidden" id="round">
         <h3 class="player-pokémon" id="player-pokémon">
           <span class="player-name" id="player-pokémon-player-name"></span>
           <span class="go-text" id="player-pokémon-go-text">GO!</span>

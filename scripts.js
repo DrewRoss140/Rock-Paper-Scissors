@@ -6,8 +6,10 @@ const playerNameInput = document.getElementById("player-name-input");
 const rivalNameInput = document.getElementById("rival-name-input");
 const postGamePlayerName = document.getElementById("post-game-player-name");
 const postGameRivalName = document.getElementById("post-game-rival-name");
+const scores = document.getElementById("scores");
 const scorePlayerName = document.getElementById("score-player-name");
 const scoreRivalName = document.getElementById("score-rival-name");
+const round = document.getElementById("round");
 const playerPokémonPlayerName = document.getElementById(
   "player-pokémon-player-name"
 );
@@ -131,6 +133,8 @@ const roundResults = ["Draw", "Lose", "Win"];
 
 // Variables.
 
+let playerName;
+let rivalName;
 let suffix;
 let playerPreviousPokémon;
 let rivalPreviousPokémon;
@@ -161,21 +165,21 @@ window.onload = function () {
   nameForm.addEventListener("submit", function (e) {
     // Prevents page refresh on form submission.
     e.preventDefault();
-    let playerName = playerNameInput.value;
-    let rivalName = rivalNameInput.value;
+    playerName = playerNameInput.value;
+    rivalName = rivalNameInput.value;
     // Validates that both inputs have
     if (playerName && rivalName) {
       nameMenu.classList.replace("active", "inactive");
       setTimeout(function () {
         nameMenu.classList.replace("inactive", "hidden");
         overlay.classList.add("fade-out");
-      }, 3000);
+      }, 2000);
       setTimeout(function () {
         overlay.classList.remove("active", "inactive");
-      }, 3000);
+      }, 2000);
       setTimeout(function () {
         overlay.classList.replace("fade-out", "hidden");
-      }, 6000);
+      }, 4000);
       assignPlayerNames(playerNameElements, playerName);
       assignPlayerNames(rivalNameElements, rivalName);
     }
@@ -222,6 +226,16 @@ function assignPokémonNames(pokémonElements, pokémonName, previousPokémon) {
 
 function handleButtonClick(buttonID) {
   const button = document.getElementById(buttonID);
+  button.addEventListener(
+    "click",
+    function () {
+      if (scores && round) {
+        scores.classList.remove("hidden");
+        round.classList.remove("hidden");
+      }
+    },
+    { once: true }
+  );
   button.addEventListener("click", function () {
     const playerChoice = button.querySelector("img").alt;
     playerPreviousPokémon = playerPokémon;

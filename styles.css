@@ -12,8 +12,10 @@ html,
 body,
 #overlay,
 .menu,
+.stat,
 header,
 main,
+#scores,
 .pokémon-sprites {
   width: 100%;
 }
@@ -36,11 +38,6 @@ button {
 
 body {
   background-attachment: fixed;
-  background-image: radial-gradient(
-    circle at center,
-    rgba(51, 51, 51, 1),
-    rgba(0, 0, 0, 1)
-  );
 }
 
 body,
@@ -49,6 +46,9 @@ body,
 #name-form,
 #name-inputs,
 button,
+#stats,
+.stats-section,
+.stat,
 header,
 main,
 .buttons,
@@ -68,6 +68,9 @@ body,
 #name-form,
 #name-inputs,
 button,
+#stats,
+.stats-section,
+.stat,
 header,
 main,
 .buttons,
@@ -87,6 +90,9 @@ body,
 #name-form,
 #name-inputs,
 button,
+#stats,
+.stats-section,
+.stat,
 header,
 main,
 .buttons,
@@ -104,6 +110,8 @@ body,
 #overlay,
 .menu,
 #name-form,
+#stats,
+.stats-section,
 main,
 .button-container,
 .score-container,
@@ -119,24 +127,28 @@ h3 {
 }
 
 body,
+#overlay {
+  background-image: radial-gradient(
+    circle at center,
+    rgba(51, 51, 51, 1),
+    rgba(0, 0, 0, 1)
+  );
+}
+
+body,
+.stats-section,
 main {
   gap: 12px;
 }
 
 #overlay {
-  backdrop-filter: blur(3px);
-  background-image: radial-gradient(
-    circle at center,
-    rgba(11, 11, 11, 0.9),
-    rgba(0, 0, 0, 0.9)
-  );
   left: 0;
   z-index: 9999;
 }
 
 #overlay,
 .menu {
-  transition: opacity 3s ease-in-out;
+  transition: opacity 2s ease-in-out;
 }
 
 #overlay,
@@ -151,20 +163,12 @@ main {
 }
 
 #overlay.hidden,
-.menu.hidden,
-#scores.hidden,
-#round.hidden {
+.menu.hidden {
   display: none;
 }
 
 .fade-out {
-  transition-delay: 3s;
-}
-
-.menu,
-#name-form,
-#scores {
-  gap: 64px;
+  transition-delay: 2s;
 }
 
 .active {
@@ -180,7 +184,8 @@ h1 {
   font-size: 90px;
 }
 
-#name-title {
+#name-title,
+#post-game-menu-versus {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2),
     0px 1px 0px rgba(224, 224, 224, 1), 0px 2px 0px rgba(204, 204, 204, 1),
     0px 3px 0px rgba(184, 184, 184, 1), 0px 4px 0px rgba(163, 163, 163, 1),
@@ -188,6 +193,11 @@ h1 {
     0px 7px 0px rgba(102, 102, 102, 1), 0px 8px 0px rgba(82, 82, 82, 1),
     0px 9px 0px rgba(61, 61, 61, 1), 0px 10px 0px rgba(41, 41, 41, 1),
     0px 11px 0px rgba(20, 20, 20, 1);
+}
+
+#name-form,
+#scores {
+  gap: 64px;
 }
 
 #name-inputs,
@@ -213,6 +223,7 @@ button,
 
 input,
 button,
+.stats-section,
 .button {
   border-color: rgba(255, 255, 255, 0.03);
   border-radius: 10px;
@@ -222,13 +233,18 @@ button,
 }
 
 input,
-button {
+button,
+.stats-section {
   background-image: radial-gradient(
     circle at center,
     rgba(61, 61, 61, 1),
     rgba(11, 11, 11, 1)
   );
   box-shadow: 0px 3px 3px rgba(0, 0, 0, 1);
+}
+
+input,
+button {
   font-weight: 900;
 }
 
@@ -260,6 +276,7 @@ input:focus {
 }
 
 #player-name-input,
+#post-game-player-name,
 #menu-title-player-name,
 #score-player,
 .player-name {
@@ -267,6 +284,7 @@ input:focus {
 }
 
 #rival-name-input,
+#post-game-rival-name,
 #menu-title-rival-name,
 #score-rival,
 .rival-name {
@@ -302,15 +320,16 @@ button,
 
 #close-button,
 .pokémon-sprites,
-h2 {
+.button-text {
   filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));
 }
 
 #close-button:hover {
   filter: drop-shadow(0px 1.5px 1.5px rgba(255, 255, 255, 1));
-  transform: scale(1.1);
+  transform: scale(1.05);
 }
 
+#post-game-player-name,
 #menu-title-player-name {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(90, 90, 224, 1),
     0px 2px 0px rgba(82, 82, 204, 1), 0px 3px 0px rgba(73, 73, 184, 1),
@@ -320,8 +339,7 @@ h2 {
     0px 10px 0px rgba(16, 16, 41, 1), 0px 11px 0px rgba(8, 8, 20, 1);
 }
 
-#menu-title-result-text .win {
-  color: rgba(0, 255, 0, 1);
+.post-game-menu-result.won {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 224, 0, 1),
     0px 2px 0px rgba(0, 204, 0, 1), 0px 3px 0px rgba(0, 184, 0, 1),
     0px 4px 0px rgba(0, 163, 0, 1), 0px 5px 0px rgba(0, 143, 0, 1),
@@ -330,8 +348,17 @@ h2 {
     0px 10px 0px rgba(0, 41, 0, 1), 0px 11px 0px rgba(0, 20, 0, 1);
 }
 
-#menu-title-result-text .lose {
-  color: rgba(255, 0, 0, 1);
+.post-game-menu-result.won,
+#rounds-won-won-text,
+#rounds-won-number,
+#win-percent,
+#total-win-percent-win-text,
+#total-win-percent-number,
+.round-result.won {
+  color: rgba(0, 255, 0, 1);
+}
+
+.post-game-menu-result.lost {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(224, 0, 0, 1),
     0px 2px 0px rgba(204, 0, 0, 1), 0px 3px 0px rgba(184, 0, 0, 1),
     0px 4px 0px rgba(163, 0, 0, 1), 0px 5px 0px rgba(143, 0, 0, 1),
@@ -340,6 +367,21 @@ h2 {
     0px 10px 0px rgba(41, 0, 0, 1), 0px 11px 0px rgba(20, 0, 0, 1);
 }
 
+.post-game-menu-result.lost,
+#rounds-lost-lost-text,
+#rounds-lost-number,
+#critical-hits-text,
+#critical-hits-number,
+#loss-percent,
+#total-loss-percent-loss-text,
+#total-loss-percent-number,
+#total-critical-hits-critical-hits-text,
+#total-critical-hits-number,
+.round-result.won {
+  color: rgba(255, 0, 0, 1);
+}
+
+#post-game-rival-name,
 #menu-title-rival-name {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(224, 90, 90, 1),
     0px 2px 0px rgba(204, 82, 82, 1), 0px 3px 0px rgba(184, 73, 73, 1),
@@ -349,11 +391,54 @@ h2 {
     0px 10px 0px rgba(41, 16, 16, 1), 0px 11px 0px rgba(20, 8, 8, 1);
 }
 
-#play-again-button {
-  font-size: 86px;
-  height: 100px;
-  text-shadow: 0px 4px 4px rgba(0, 0, 0, 1);
-  width: 400px;
+#stats {
+  gap: 24px;
+}
+
+.stats-section {
+  width: 500px;
+}
+
+.stats-section,
+.button {
+  background-image: radial-gradient(
+    circle at center,
+    rgba(81, 81, 81, 1),
+    rgba(21, 21, 21, 1)
+  );
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
+}
+
+.stat {
+  filter: drop-shadow(0px 3px 2px rgba(0, 0, 0, 1));
+  font-size: 34px;
+  justify-content: space-between;
+}
+
+.stat,
+#round {
+  text-shadow: 3px 3px rgba(0, 0, 0, 1), 3.5px 3.5px rgba(86, 73, 92, 1),
+    4.5px 4.5px rgba(86, 73, 92, 1);
+}
+
+.menu {
+  gap: 48px;
+}
+
+#rounds-drawn-draw-text,
+#rounds-drawn-number,
+#draw-percent,
+#total-drawn-percent-draw-text,
+#total-draw-percent-number {
+  color: rgba(0, 0, 255, 1);
+}
+
+#critical-hits-text,
+#critical-hits-number,
+#total-critical-hits-critical-hits-text,
+#total-critical-hits-number {
+  text-shadow: 3px 3px rgba(0, 0, 0, 1), 3.5px 3.5px rgba(255, 255, 0, 1),
+    4.5px 4.5px rgba(255, 255, 0, 1);
 }
 
 a {
@@ -414,11 +499,6 @@ a {
 }
 
 .button {
-  background-image: radial-gradient(
-    circle at center,
-    rgba(81, 81, 81, 1),
-    rgba(21, 21, 21, 1)
-  );
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 1);
   height: 225px;
   width: 225px;
@@ -452,7 +532,7 @@ a {
   filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 1));
 }
 
-h2,
+.button-text,
 #scores {
   font-size: 56px;
 }
@@ -486,6 +566,11 @@ h2,
   text-align: center;
 }
 
+.scores.hidden,
+.round.hidden {
+  visibility: hidden;
+}
+
 .score-container {
   gap: 8px;
 }
@@ -505,8 +590,6 @@ h2,
 #round {
   gap: 14px;
   font-size: 36px;
-  text-shadow: 3px 3px rgba(0, 0, 0, 1), 3.5px 3.5px rgba(86, 73, 92, 1),
-    4.5px 4.5px rgba(86, 73, 92, 1);
 }
 
 .go-text,
@@ -529,12 +612,4 @@ h2,
 .player-pokémon-attack.squirtle,
 .rival-pokémon-attack.squirtle {
   color: rgba(128, 163, 219, 1);
-}
-
-.round-result.won {
-  color: rgba(0, 255, 0, 1);
-}
-
-.round-result.lost {
-  color: rgba(255, 0, 0, 1);
 }

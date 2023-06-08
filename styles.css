@@ -341,7 +341,7 @@ button,
     0px 10px 0px rgba(16, 16, 41, 1), 0px 11px 0px rgba(8, 8, 20, 1);
 }
 
-.post-game-result.won {
+.post-game-result.win {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(0, 224, 0, 1),
     0px 2px 0px rgba(0, 204, 0, 1), 0px 3px 0px rgba(0, 184, 0, 1),
     0px 4px 0px rgba(0, 163, 0, 1), 0px 5px 0px rgba(0, 143, 0, 1),
@@ -350,17 +350,21 @@ button,
     0px 10px 0px rgba(0, 41, 0, 1), 0px 11px 0px rgba(0, 20, 0, 1);
 }
 
-.post-game-result.won,
+.post-game-result.win,
 #rounds-won-won-text,
 #rounds-won-number,
 #win-percent,
+#total-rounds-won-won-text,
+#total-rounds-won-number,
 #total-win-percent-win-text,
 #total-win-percent-number,
-.round-result.won {
+.player-attack-effectiveness.win,
+.rival-attack-effectiveness.win,
+.round-result.win {
   color: rgba(0, 255, 0, 1);
 }
 
-.post-game-result.lost {
+.post-game-result.lose {
   text-shadow: 0px 1px 0px rgba(0, 0, 0, 0.2), 0px 1px 0px rgba(224, 0, 0, 1),
     0px 2px 0px rgba(204, 0, 0, 1), 0px 3px 0px rgba(184, 0, 0, 1),
     0px 4px 0px rgba(163, 0, 0, 1), 0px 5px 0px rgba(143, 0, 0, 1),
@@ -369,18 +373,35 @@ button,
     0px 10px 0px rgba(41, 0, 0, 1), 0px 11px 0px rgba(20, 0, 0, 1);
 }
 
-.post-game-result.lost,
+.post-game-result.lose,
 #rounds-lost-lost-text,
 #rounds-lost-number,
 #critical-hits-text,
 #critical-hits-number,
 #loss-percent,
+#total-rounds-lost-lost-text,
+#total-rounds-lost-number,
 #total-loss-percent-loss-text,
 #total-loss-percent-number,
 #total-critical-hits-critical-hits-text,
 #total-critical-hits-number,
-.round-result.lost {
+.player-attack-effectiveness.lose,
+.rival-attack-effectiveness.lose,
+.round-result.lose {
   color: rgba(255, 0, 0, 1);
+}
+
+#rounds-drawn-draw-text,
+#rounds-drawn-number,
+#draw-percent,
+#total-rounds-drawn-drawn-text,
+#total-rounds-drawnross-number,
+#total-drawn-percent-draw-text,
+#total-draw-percent-number,
+.player-attack-effectiveness.draw,
+.rival-attack-effectiveness.draw,
+.round-result.draw {
+  color: rgba(0, 0, 255, 1);
 }
 
 #post-game-rival-name,
@@ -425,15 +446,6 @@ button,
 
 .menu {
   gap: 48px;
-}
-
-#rounds-drawn-draw-text,
-#rounds-drawn-number,
-#draw-percent,
-#total-drawn-percent-draw-text,
-#total-draw-percent-number,
-.round-result.drew {
-  color: rgba(0, 0, 255, 1);
 }
 
 #critical-hits-text,
@@ -569,6 +581,11 @@ a {
   text-align: center;
 }
 
+#scores.hidden {
+  height: 122px;
+  width: 1365px;
+}
+
 .score-container {
   gap: 8px;
 }
@@ -588,6 +605,11 @@ a {
 #round {
   gap: 14px;
   font-size: 36px;
+}
+
+#round.hidden {
+  height: 343px;
+  width: 594.84px;
 }
 
 .go-text,

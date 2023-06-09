@@ -65,140 +65,150 @@
           <span class="post-game-rival-name" id="post-game-rival-name"></span>
         </h1>
         <div class="stats" id="stats">
-          <div class="stats-section" id="round-stats">
-            <div class="stat" id="rounds-played">
-              <h2 class="stat-text" id="rounds-played-text">
-                ROUNDS
-                <span class="stat-stat-text" id="rounds-played-played-text"
-                  >PLAYED:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="rounds-played-number"></h2>
+          <div class="stat-section" id="round-stats">
+            <div class="stat-panel" id="round-stats">
+              <div class="stat" id="rounds-played">
+                <h2 class="stat-text" id="rounds-played-text">
+                  ROUNDS
+                  <span class="stat-stat-text" id="rounds-played-played-text"
+                    >PLAYED:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="rounds-played-number"></h2>
+              </div>
+              <div class="stat" id="rounds-won">
+                <h2 class="stat-text" id="rounds-won-text">
+                  ROUNDS
+                  <span class="stat-stat-text" id="rounds-won-won-text"
+                    >WON:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="rounds-won-number"></h2>
+              </div>
+              <div class="stat" id="rounds-lost">
+                <h2 class="stat-text" id="rounds-lost-text">
+                  ROUNDS
+                  <span class="stat-stat-text" id="rounds-lost-lost-text"
+                    >LOST:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="rounds-lost-number"></h2>
+              </div>
+              <div class="stat" id="rounds-drawn">
+                <h2 class="stat-text" id="rounds-drawn-text">
+                  ROUNDS
+                  <span class="stat-stat-text" id="rounds-drawn-draw-text"
+                    >DRAWN:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="rounds-drawn-number"></h2>
+              </div>
+              <div class="stat" id="critical-hits">
+                <h2 class="stat-text" id="critical-hits-text">
+                  CRITICAL HITS:
+                </h2>
+                <h2 class="stat-number" id="critical-hits-number"></h2>
+              </div>
             </div>
-            <div class="stat" id="rounds-won">
-              <h2 class="stat-text" id="rounds-won-text">
-                ROUNDS
-                <span class="stat-stat-text" id="rounds-won-won-text"
-                  >WON:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="rounds-won-number"></h2>
-            </div>
-            <div class="stat" id="rounds-lost">
-              <h2 class="stat-text" id="rounds-lost-text">
-                ROUNDS
-                <span class="stat-stat-text" id="rounds-lost-lost-text"
-                  >LOST:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="rounds-lost-number"></h2>
-            </div>
-            <div class="stat" id="rounds-drawn">
-              <h2 class="stat-text" id="rounds-drawn-text">
-                ROUNDS
-                <span class="stat-stat-text" id="rounds-drawn-draw-text"
-                  >DRAWN:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="rounds-drawn-number"></h2>
-            </div>
-            <div class="stat" id="critical-hits">
-              <h2 class="stat-text" id="critical-hits-text">CRITICAL HITS:</h2>
-              <h2 class="stat-number" id="critical-hits-number"></h2>
-            </div>
-          </div>
-          <div class="stats-section" id="percent-stats">
-            <div class="stat" id="win-percent">
-              <h2 class="stat-text" id="win-percent-win-text">WIN%:</h2>
-              <h2 class="stat-number" id="win-percent-number"></h2>
-            </div>
-            <div class="stat" id="loss-percent">
-              <h2 class="stat-text" id="loss-percent-loss-text">LOSS%:</h2>
-              <h2 class="stat-number" id="loss-percent-number"></h2>
-            </div>
-            <div class="stat" id="draw-percent">
-              <h2 class="stat-text" id="draw-percent-drawn-text">DRAW%:</h2>
-              <h2 class="stat-number" id="draw-percent-number"></h2>
-            </div>
-          </div>
-          <div class="stats-section" id="total-round-stats">
-            <div class="stat" id="total-rounds-played">
-              <h2 class="stat-text" id="total-rounds-played-text">
-                TOTAL ROUNDS
-                <span
-                  class="stat-stat-text"
-                  id="total-rounds-played-played-text"
-                  >PLAYED:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-rounds-played-number"></h2>
-            </div>
-            <div class="stat" id="total-rounds-won">
-              <h2 class="stat-text" id="total-rounds-won-text">
-                TOTAL ROUNDS
-                <span class="stat-stat-text" id="total-rounds-won-won-text"
-                  >WON:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-rounds-won-number"></h2>
-            </div>
-            <div class="stat" id="total-rounds-lost">
-              <h2 class="stat-text" id="total-rounds-lost-text">
-                TOTAL ROUNDS
-                <span class="stat-stat-text" id="total-rounds-lost-lost-text"
-                  >LOST:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-rounds-lost-number"></h2>
-            </div>
-            <div class="stat" id="total-rounds-drawn">
-              <h2 class="stat-text" id="total-rounds-drawn-text">
-                TOTAL ROUNDS
-                <span class="stat-stat-text" id="total-rounds-drawn-drawn-text"
-                  >DRAWN:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-rounds-drawn-number"></h2>
-            </div>
-            <div class="stat" id="total-critical-hits">
-              <h2 class="stat-text" id="total-critical-hits-text">
-                TOTAL
-                <span
-                  class="stat-stat-text"
-                  id="total-critical-hits-critical-hits-text"
-                  >CRITICAL HITS:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-critical-hits-number"></h2>
+            <div class="stat-panel" id="percent-stats">
+              <div class="stat" id="win-percent">
+                <h2 class="stat-text" id="win-percent-win-text">WIN%:</h2>
+                <h2 class="stat-number" id="win-percent-number"></h2>
+              </div>
+              <div class="stat" id="loss-percent">
+                <h2 class="stat-text" id="loss-percent-loss-text">LOSS%:</h2>
+                <h2 class="stat-number" id="loss-percent-number"></h2>
+              </div>
+              <div class="stat" id="draw-percent">
+                <h2 class="stat-text" id="draw-percent-drawn-text">DRAW%:</h2>
+                <h2 class="stat-number" id="draw-percent-number"></h2>
+              </div>
             </div>
           </div>
-          <div class="stats-section" id="total-percent-stats">
-            <div class="stat" id="total-win-percent">
-              <h2 class="stat-text" id="total-win-percent-text">
-                TOTAL
-                <span class="stat-stat-text" id="total-win-percent-win-text"
-                  >WIN%:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-win-percent-number"></h2>
+          <div class="stat-section" id="game-stats">
+            <div class="stat-panel" id="total-round-stats">
+              <div class="stat" id="total-rounds-played">
+                <h2 class="stat-text" id="total-rounds-played-text">
+                  TOTAL ROUNDS
+                  <span
+                    class="stat-stat-text"
+                    id="total-rounds-played-played-text"
+                    >PLAYED:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-rounds-played-number"></h2>
+              </div>
+              <div class="stat" id="total-rounds-won">
+                <h2 class="stat-text" id="total-rounds-won-text">
+                  TOTAL ROUNDS
+                  <span class="stat-stat-text" id="total-rounds-won-won-text"
+                    >WON:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-rounds-won-number"></h2>
+              </div>
+              <div class="stat" id="total-rounds-lost">
+                <h2 class="stat-text" id="total-rounds-lost-text">
+                  TOTAL ROUNDS
+                  <span class="stat-stat-text" id="total-rounds-lost-lost-text"
+                    >LOST:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-rounds-lost-number"></h2>
+              </div>
+              <div class="stat" id="total-rounds-drawn">
+                <h2 class="stat-text" id="total-rounds-drawn-text">
+                  TOTAL ROUNDS
+                  <span
+                    class="stat-stat-text"
+                    id="total-rounds-drawn-drawn-text"
+                    >DRAWN:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-rounds-drawn-number"></h2>
+              </div>
+              <div class="stat" id="total-critical-hits">
+                <h2 class="stat-text" id="total-critical-hits-text">
+                  TOTAL
+                  <span
+                    class="stat-stat-text"
+                    id="total-critical-hits-critical-hits-text"
+                    >CRITICAL HITS:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-critical-hits-number"></h2>
+              </div>
             </div>
-            <div class="stat" id="total-loss-percent">
-              <h2 class="stat-text" id="total-loss-percent-text">
-                TOTAL
-                <span class="stat-stat-text" id="total-loss-percent-loss-text"
-                  >LOSS%:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-loss-percent-number"></h2>
-            </div>
-            <div class="stat" id="total-drawn-percent">
-              <h2 class="stat-text" id="total-drawn-percent-text">
-                TOTAL
-                <span class="stat-stat-text" id="total-drawn-percent-draw-text"
-                  >DRAW%:</span
-                >
-              </h2>
-              <h2 class="stat-number" id="total-draw-percent-number"></h2>
+            <div class="stat-panel" id="total-percent-stats">
+              <div class="stat" id="total-win-percent">
+                <h2 class="stat-text" id="total-win-percent-text">
+                  TOTAL
+                  <span class="stat-stat-text" id="total-win-percent-win-text"
+                    >WIN%:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-win-percent-number"></h2>
+              </div>
+              <div class="stat" id="total-loss-percent">
+                <h2 class="stat-text" id="total-loss-percent-text">
+                  TOTAL
+                  <span class="stat-stat-text" id="total-loss-percent-loss-text"
+                    >LOSS%:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-loss-percent-number"></h2>
+              </div>
+              <div class="stat" id="total-drawn-percent">
+                <h2 class="stat-text" id="total-drawn-percent-text">
+                  TOTAL
+                  <span
+                    class="stat-stat-text"
+                    id="total-drawn-percent-draw-text"
+                    >DRAW%:</span
+                  >
+                </h2>
+                <h2 class="stat-number" id="total-draw-percent-number"></h2>
+              </div>
             </div>
           </div>
         </div>
@@ -326,6 +336,9 @@
             id="player-attack-player-pokémon-attack"
           ></span>
         </h3>
+        <h3 class="critical-hit disabled" id="player-critical-hit">
+          A critical hit!
+        </h3>
         <h3 class="player-effectiveness" id="player-effectiveness">
           <span
             class="pre-effectiveness-text"
@@ -347,6 +360,9 @@
             class="rival-pokémon-attack"
             id="rival-attack-rival-pokémon-attack"
           ></span>
+        </h3>
+        <h3 class="critical-hit disabled" id="rival-critical-hit">
+          A critical hit!
         </h3>
         <h3 class="rival-effectiveness" id="rival-effectiveness">
           <span

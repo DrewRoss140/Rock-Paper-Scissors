@@ -191,6 +191,16 @@ const pokémonAttackEffectiveness = {
   },
 };
 
+const attackIDs = {
+  Win: "player-attack",
+  Lose: "rival-attack",
+};
+
+const criticalHitIDs = {
+  Win: "player-critical-hit",
+  Lose: "rival-critical-hit",
+};
+
 // Variables.
 let playerName;
 let rivalName;
@@ -229,6 +239,7 @@ let totalCriticalHits = 0;
 let totalWinPercentValue;
 let totalLossPercentValue;
 let totalDrawPercentValue;
+let criticalHits = 0;
 
 // Executes on page loading.
 window.onload = function () {
@@ -308,6 +319,10 @@ function handleButtonClick(buttonID) {
     { once: true }
   );
   button.addEventListener("click", function () {
+    const criticalHitElements = document.getElementsByClassName("critical-hit");
+    for (let i = 0; i < criticalHitElements.length; i++) {
+      criticalHitElements[i].classList.add("disabled");
+    }
     roundsPlayed++;
     const playerChoice = button.querySelector("img").alt;
     playerPreviousPokémon = playerPokémon;
@@ -334,7 +349,6 @@ function handleButtonClick(buttonID) {
       rivalPreviousPokémon
     );
     rivalPokémonAttack = retrieveRandomItem(pokémonAttacks[rivalChoice]);
-
     rivalAttackRivalPokémonAttack.textContent = `${rivalPokémonAttack}!`;
     if (rivalPreviousPokémon) {
       rivalAttackRivalPokémonAttack.classList.remove(
@@ -361,6 +375,7 @@ function handleButtonClick(buttonID) {
       resultRoundResult.classList.remove("win", "lose");
       resultRoundResult.classList.add("draw");
     }
+    generateCriticalHit(roundResult);
     updateEffectivenessText(roundResult);
     checkScores();
     scorePlayerNumber.textContent = playerScore;
@@ -442,7 +457,7 @@ function checkScores() {
     roundsWonNumber.textContent = roundsWon;
     roundsLostNumber.textContent = roundsLost;
     roundsDrawnNumber.textContent = roundsDrawn;
-    criticalHitsNumber.textContent = null;
+    criticalHitsNumber.textContent = criticalHits;
     winPercentValue = ((roundsWon / roundsPlayed) * 100).toFixed(2);
     winPercentNumber.textContent = `${winPercentValue}%`;
     lossPercentValue = ((roundsLost / roundsPlayed) * 100).toFixed(2);
@@ -453,7 +468,7 @@ function checkScores() {
     totalRoundsWonNumber.textContent = totalRoundsWon;
     totalRoundsLostNumber.textContent = totalRoundsLost;
     totalRoundsDrawnNumber.textContent = totalRoundsDrawn;
-    totalCriticalHitsNumber.textContent = null;
+    totalCriticalHitsNumber.textContent = totalCriticalHits;
     totalWinPercentValue = ((totalRoundsWon / totalRoundsPlayed) * 100).toFixed(
       2
     );
@@ -468,5 +483,18 @@ function checkScores() {
       100
     ).toFixed(2);
     totalDrawPercentNumber.textContent = `${totalDrawPercentValue}%`;
+  }
+}
+
+function generateCriticalHit(roundResult) {
+  const attackElement = document.getElementById(attackIDs[roundResult]);
+  const criticalHitElement = document.getElementById(
+    criticalHitIDs[roundResult]
+  );
+  if (attackElement && criticalHitElement && Math.random() <= 0.33) {
+    criticalHits += 1;
+    totalCriticalHits += 1;
+    criticalHitElement.classList.remove("disabled");
+    attackElement.insertAdjacentElement("afterend", criticalHitElement);
   }
 }

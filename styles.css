@@ -4,7 +4,7 @@
 }
 
 html {
-  overflow-y: hidden;
+  overflow: hidden;
   scroll-behavior: smooth;
 }
 
@@ -156,12 +156,13 @@ main {
 }
 
 #overlay,
-#close-button-container {
+#close-icon-container {
   position: fixed;
   top: 0;
 }
 
 #overlay.hidden,
+.stats-icon.hidden,
 .menu.hidden,
 .scores.hidden,
 .round.hidden {
@@ -185,9 +186,49 @@ main {
   opacity: 0 !important;
 }
 
+button,
+#stats-icon,
+#close-icon,
+.button {
+  cursor: pointer;
+}
+
 h1 {
   filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 1));
   font-size: 90px;
+}
+
+#header-title {
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+}
+
+#stats-icon {
+  align-self: flex-start;
+  padding-right: 2px;
+  padding-top: 2px;
+}
+
+#stats-icon,
+#close-icon,
+.pokémon-sprites,
+.button-text {
+  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));
+}
+
+#stats-icon,
+#close-icon {
+  fill: rgba(255, 255, 255, 1);
+  height: 30px;
+  width: 30px;
+}
+
+#stats-icon:hover,
+#close-icon:hover {
+  filter: drop-shadow(0px 1.5px 1.5px rgba(255, 255, 255, 1));
+  transform: scale(1.05);
 }
 
 #name-title,
@@ -221,7 +262,8 @@ input {
 
 input,
 button,
-#close-button,
+#stats-icon,
+#close-icon,
 .button,
 .pokémon-sprites {
   transition: 0.75s all ease-in-out;
@@ -302,37 +344,13 @@ input:focus {
   width: 180px;
 }
 
-button,
-#close-button,
-.button {
-  cursor: pointer;
-}
-
 #continue-cont-letters,
 #continue-i-letter {
   margin-right: -2px;
 }
 
-#close-button-container {
-  padding: 8px;
+#close-icon-container {
   right: 0;
-}
-
-#close-button {
-  fill: rgba(255, 255, 255, 1);
-  height: 40px;
-  width: 40px;
-}
-
-#close-button,
-.pokémon-sprites,
-.button-text {
-  filter: drop-shadow(0px 2px 2px rgba(0, 0, 0, 1));
-}
-
-#close-button:hover {
-  filter: drop-shadow(0px 1.5px 1.5px rgba(255, 255, 255, 1));
-  transform: scale(1.05);
 }
 
 #post-game-player-name,

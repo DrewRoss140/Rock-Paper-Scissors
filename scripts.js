@@ -95,6 +95,8 @@ const totalRoundsLostNumber = document.getElementById(
 const totalRoundsDrawnNumber = document.getElementById(
   "total-rounds-drawn-number"
 );
+const statsIcon = document.getElementById("stats-icon");
+const closeIcon = document.getElementById("close-icon");
 
 // Data Structures.
 const buttons = ["fire-button", "grass-button", "water-button"];
@@ -240,6 +242,7 @@ let totalWinPercentValue;
 let totalLossPercentValue;
 let totalDrawPercentValue;
 let criticalHits = 0;
+let roundActive = true;
 
 // Executes on page loading.
 window.onload = function () {
@@ -267,8 +270,6 @@ window.onload = function () {
     }
   });
 };
-
-buttons.forEach(handleButtonClick);
 
 // Assigns inputted player and rival names to their respective DOM elements.
 function assignPlayerNames(elements, name) {
@@ -308,17 +309,17 @@ function assignPokémonNames(pokémonElements, pokémonName, previousPokémon) {
 
 function handleButtonClick(buttonID) {
   const button = document.getElementById(buttonID);
-  button.addEventListener(
-    "click",
-    function () {
-      if (scores && round) {
-        scores.classList.remove("hidden");
-        round.classList.remove("hidden");
-      }
-    },
-    { once: true }
-  );
   button.addEventListener("click", function () {
+    if (
+      scores.classList.contains("hidden") &&
+      round.classList.contains("hidden")
+    ) {
+      scores.classList.remove("hidden");
+      round.classList.remove("hidden");
+    }
+  });
+  button.addEventListener("click", function () {
+    if (!roundActive) return;
     const criticalHitElements = document.getElementsByClassName("critical-hit");
     for (let i = 0; i < criticalHitElements.length; i++) {
       criticalHitElements[i].classList.add("disabled");
@@ -430,6 +431,7 @@ function getRoundResult(playerChoice, rivalChoice) {
       return rivalChoice === "Fire" ? "Win" : "Lose";
   }
 }
+buttons.forEach(handleButtonClick);
 
 function checkScores() {
   if (playerScore === 5 || rivalScore === 5) {
@@ -483,6 +485,7 @@ function checkScores() {
       100
     ).toFixed(2);
     totalDrawPercentNumber.textContent = `${totalDrawPercentValue}%`;
+    roundActive = false;
   }
 }
 
@@ -498,3 +501,38 @@ function generateCriticalHit(roundResult) {
     attackElement.insertAdjacentElement("afterend", criticalHitElement);
   }
 }
+
+closeIcon.addEventListener("click", function () {
+  if (overlay && postGameMenu) {
+    statsIcon.classList.remove("hidden");
+    setTimeout(function () {
+      overlay.classList.replace("active", "inactive");
+    }, 0);
+    setTimeout(function () {
+      overlay.classList.replace("inactive", "disabled");
+      overlay.classList.add("fade-out");
+    }, 1000);
+    setTimeout(function () {
+      overlay.classList.remove("active", "inactive");
+    }, 1500);
+    setTimeout(function () {
+      overlay.classList.replace("fade-out", "hidden");
+      overlay.classList.remove("disabled");
+    }, 2000);
+  }
+});
+
+statsIcon.addEventListener("click", function () {
+  if (overlay && postGameMenu) {
+    setTimeout(function () {
+      overlay.classList.replace("inactive", "active");
+      overlay.classList.remove("fade-out");
+    }, 0);
+    setTimeout(function () {
+      overlay.classList.add("active");
+    }, 0);
+    setTimeout(function () {
+      overlay.classList.remove("hidden");
+    }, 0);
+  }
+});

@@ -1,18 +1,69 @@
-// DOM Elements.
+// Overlay DOM Elements
+
 const overlay = document.getElementById("overlay");
+
+// Name Menu DOM Elements
+
 const nameMenu = document.getElementById("name-menu");
 const nameForm = document.getElementById("name-form");
 const playerNameInput = document.getElementById("player-name-input");
 const rivalNameInput = document.getElementById("rival-name-input");
+
+// Post-Game Menu DOM Elements
+
 const postGameMenu = document.getElementById("post-game-menu");
 const postGamePlayerName = document.getElementById("post-game-player-name");
 const postGameResult = document.getElementById("post-game-result");
 const postGameRivalName = document.getElementById("post-game-rival-name");
+const roundsPlayedNumber = document.getElementById("rounds-played-number");
+const roundsWonNumber = document.getElementById("rounds-won-number");
+const roundsLostNumber = document.getElementById("rounds-lost-number");
+const roundsDrawnNumber = document.getElementById("rounds-drawn-number");
+const criticalHitsNumber = document.getElementById("critical-hits-number");
+const winPercentNumber = document.getElementById("win-percent-number");
+const lossPercentNumber = document.getElementById("loss-percent-number");
+const drawPercentNumber = document.getElementById("draw-percent-number");
+const totalRoundsPlayedNumber = document.getElementById(
+  "total-rounds-played-number"
+);
+const totalRoundsWonNumber = document.getElementById("total-rounds-won-number");
+const totalRoundsLostNumber = document.getElementById(
+  "total-rounds-lost-number"
+);
+const totalRoundsDrawnNumber = document.getElementById(
+  "total-rounds-drawn-number"
+);
+const totalCriticalHitsNumber = document.getElementById(
+  "total-critical-hits-number"
+);
+const totalWinPercentNumber = document.getElementById(
+  "total-win-percent-number"
+);
+const totalLossPercentNumber = document.getElementById(
+  "total-loss-percent-number"
+);
+const totalDrawPercentNumber = document.getElementById(
+  "total-draw-percent-number"
+);
+
+// Main DOM Elements
+
+// Header DOM Elements
+
+const playIcon = document.getElementById("play-icon");
+const statsIcon = document.getElementById("stats-icon");
+const closeIcon = document.getElementById("close-icon");
+
+// Score DOM Elements
+
 const scores = document.getElementById("scores");
 const scorePlayerName = document.getElementById("score-player-name");
 const scorePlayerNumber = document.getElementById("score-player-number");
 const scoreRivalName = document.getElementById("score-rival-name");
 const scoreRivalNumber = document.getElementById("score-rival-number");
+
+// Round DOM Elements
+
 const round = document.getElementById("round");
 const playerPokémonPlayerName = document.getElementById(
   "player-pokémon-player-name"
@@ -35,12 +86,24 @@ const playerAttackPokémonName = document.getElementById(
 const playerAttackPlayerPokémonAttack = document.getElementById(
   "player-attack-player-pokémon-attack"
 );
+const playerPreEffectivenessText = document.getElementById(
+  "player-pre-effectiveness-text"
+);
+const playerAttackEffectiveness = document.getElementById(
+  "player-attack-effectiveness"
+);
 const rivalAttackRivalName = document.getElementById("rival-attack-rival-name");
 const rivalAttackPokémonName = document.getElementById(
   "rival-attack-pokémon-name"
 );
 const rivalAttackRivalPokémonAttack = document.getElementById(
   "rival-attack-rival-pokémon-attack"
+);
+const rivalPreEffectivenessText = document.getElementById(
+  "rival-pre-effectiveness-text"
+);
+const rivalAttackEffectiveness = document.getElementById(
+  "rival-attack-effectiveness"
 );
 const resultPlayerName = document.getElementById("result-player-name");
 4;
@@ -53,53 +116,30 @@ const resultRivalPokémonName = document.getElementById(
   "result-rival-pokémon-name"
 );
 
-const playerPreEffectivenessText = document.getElementById(
-  "player-pre-effectiveness-text"
-);
-const playerAttackEffectiveness = document.getElementById(
-  "player-attack-effectiveness"
-);
-const rivalPreEffectivenessText = document.getElementById(
-  "rival-pre-effectiveness-text"
-);
-const rivalAttackEffectiveness = document.getElementById(
-  "rival-attack-effectiveness"
-);
-const roundsPlayedNumber = document.getElementById("rounds-played-number");
-const roundsWonNumber = document.getElementById("rounds-won-number");
-const roundsLostNumber = document.getElementById("rounds-lost-number");
-const roundsDrawnNumber = document.getElementById("rounds-drawn-number");
-const criticalHitsNumber = document.getElementById("critical-hits-number");
-const winPercentNumber = document.getElementById("win-percent-number");
-const lossPercentNumber = document.getElementById("loss-percent-number");
-const drawPercentNumber = document.getElementById("draw-percent-number");
-const totalRoundsPlayedNumber = document.getElementById(
-  "total-rounds-played-number"
-);
-const totalWinPercentNumber = document.getElementById(
-  "total-win-percent-number"
-);
-const totalLossPercentNumber = document.getElementById(
-  "total-loss-percent-number"
-);
-const totalDrawPercentNumber = document.getElementById(
-  "total-draw-percent-number"
-);
-const totalCriticalHitsNumber = document.getElementById(
-  "total-critical-hits-number"
-);
-const totalRoundsWonNumber = document.getElementById("total-rounds-won-number");
-const totalRoundsLostNumber = document.getElementById(
-  "total-rounds-lost-number"
-);
-const totalRoundsDrawnNumber = document.getElementById(
-  "total-rounds-drawn-number"
-);
-const statsIcon = document.getElementById("stats-icon");
-const closeIcon = document.getElementById("close-icon");
+// Data Structures
 
-// Data Structures.
-const buttons = ["fire-button", "grass-button", "water-button"];
+const playerNameElements = {
+  "player-name-elements": [
+    postGamePlayerName,
+    scorePlayerName,
+    resultPlayerName,
+  ],
+  "player-name-elements-with-colon": [playerPokémonPlayerName],
+  "player-name-elements-with-apostrophe": [
+    playerAttackPlayerName,
+    resultPlayerName,
+  ],
+};
+
+const rivalNameElements = {
+  "rival-name-elements": [scoreRivalName, resultRivalName],
+  "rival-name-elements-with-apostrophe": [
+    rivalAttackRivalName,
+    resultRivalName,
+  ],
+  "rival-name-elements-with-colon": [rivalPokémonRivalName],
+  "rival-name-elements-with-exclamation": [postGameRivalName],
+};
 
 const pokémon = {
   Fire: "CHARMANDER",
@@ -107,7 +147,10 @@ const pokémon = {
   Water: "SQUIRTLE",
 };
 
-const choices = ["Fire", "Grass", "Water"];
+const playerPokémonNameElements = {
+  "player-pokémon-elements": [playerAttackPokémonName, resultPlayerPokémonName],
+  "player-pokémon-elements-with-exclamation": [playerPokémonPokémonName],
+};
 
 const pokémonAttacks = {
   Fire: [
@@ -137,33 +180,6 @@ const pokémonAttacks = {
   ],
 };
 
-const playerNameElements = {
-  "player-name-elements": [
-    postGamePlayerName,
-    scorePlayerName,
-    resultPlayerName,
-  ],
-  "player-name-elements-with-colon": [playerPokémonPlayerName],
-  "player-name-elements-with-apostrophe": [
-    playerAttackPlayerName,
-    resultPlayerName,
-  ],
-};
-
-const rivalNameElements = {
-  "rival-name-elements": [postGameRivalName, scoreRivalName, resultRivalName],
-  "rival-name-elements-with-colon": [rivalPokémonRivalName],
-  "rival-name-elements-with-apostrophe": [
-    rivalAttackRivalName,
-    resultRivalName,
-  ],
-};
-
-const playerPokémonNameElements = {
-  "player-pokémon-elements": [playerAttackPokémonName, resultPlayerPokémonName],
-  "player-pokémon-elements-with-exclamation": [playerPokémonPokémonName],
-};
-
 const rivalPokémonNameElements = {
   "rival-pokémon-elements": [rivalAttackPokémonName],
   "rival-pokémon-elements-with-exclamation": [
@@ -172,11 +188,7 @@ const rivalPokémonNameElements = {
   ],
 };
 
-const roundResultMap = {
-  Win: { player: "Win", rival: "Lose" },
-  Lose: { player: "Lose", rival: "Win" },
-  Draw: { player: "Draw", rival: "Draw" },
-};
+const choices = ["Fire", "Grass", "Water"];
 
 const pokémonAttackEffectiveness = {
   Draw: {
@@ -193,6 +205,14 @@ const pokémonAttackEffectiveness = {
   },
 };
 
+const roundResultMap = {
+  Win: { player: "Win", rival: "Lose" },
+  Lose: { player: "Lose", rival: "Win" },
+  Draw: { player: "Draw", rival: "Draw" },
+};
+
+const buttons = ["fire-button", "grass-button", "water-button"];
+
 const attackIDs = {
   Win: "player-attack",
   Lose: "rival-attack",
@@ -203,46 +223,40 @@ const criticalHitIDs = {
   Lose: "rival-critical-hit",
 };
 
-// Variables.
+// Variables
+
 let playerName;
 let rivalName;
-let roundsDrawn = 0;
-let roundsWon = 0;
-let roundsLost = 0;
-let roundsPlayed = 0;
-let playerScore = 0;
-let rivalScore = 0;
 let suffix;
+let roundActive = true;
+let roundsPlayed = 0;
 let playerPreviousPokémon;
-let rivalPreviousPokémon;
-let playerChoice;
-let rivalChoice;
 let playerPokémon;
-let rivalPokémon;
 let playerPokémonAttack;
+let rivalChoice;
+let rivalPreviousPokémon;
+let rivalPokémon;
 let rivalPokémonAttack;
-let playerPokémonAttackEffectiveness;
-let rivalPokémonAttackEffectiveness;
 let roundResult;
-let expValue;
-let winPercent;
-let lossPercent;
-let totalWinPercent;
-let totalLossPercent;
-let totalDrawPercent;
-let winPercentValue;
-let lossPercentValue;
-let drawPercentValue;
+let playerScore = 0;
+let roundsWon = 0;
+let rivalScore = 0;
+let roundsLost = 0;
+let roundsDrawn = 0;
 let totalRoundsPlayed = 0;
 let totalRoundsWon = 0;
 let totalRoundsLost = 0;
 let totalRoundsDrawn = 0;
+let criticalHits = 0;
+let winPercentValue;
+let lossPercentValue;
+let drawPercentValue;
 let totalCriticalHits = 0;
 let totalWinPercentValue;
 let totalLossPercentValue;
 let totalDrawPercentValue;
-let criticalHits = 0;
-let roundActive = true;
+
+//// REFACTOR EVERYTHING BELOW.
 
 // Executes on page loading.
 window.onload = function () {
@@ -281,6 +295,8 @@ function assignPlayerNames(elements, name) {
       // Checks if items in playerNameElements/rivalNameElements are associated to the key "with-apostrophe".
     } else if (key.includes("with-apostrophe")) {
       suffix = name.endsWith("s") ? "'" : "'s";
+    } else if (key.includes("with-exclamation")) {
+      suffix = "!";
     }
     // Assigns inputted names to their respective DOM elements, with the addition of the relevant suffix (if applicable).
     elements[key].forEach((element) => {
@@ -311,7 +327,7 @@ function handleButtonClick(buttonID) {
   const button = document.getElementById(buttonID);
   button.addEventListener("click", function () {
     if (
-      scores.classList.contains("hidden") &&
+      scores.classList.contains("hidden") ||
       round.classList.contains("hidden")
     ) {
       scores.classList.remove("hidden");
@@ -504,6 +520,7 @@ function generateCriticalHit(roundResult) {
 
 closeIcon.addEventListener("click", function () {
   if (overlay && postGameMenu) {
+    playIcon.classList.remove("hidden");
     statsIcon.classList.remove("hidden");
     setTimeout(function () {
       overlay.classList.replace("active", "inactive");
@@ -535,4 +552,22 @@ statsIcon.addEventListener("click", function () {
       overlay.classList.remove("hidden");
     }, 0);
   }
+});
+
+function resetGame() {
+  playerScore = 0;
+  rivalScore = 0;
+  roundsPlayed = 0;
+  roundsWon = 0;
+  roundsLost = 0;
+  roundsDrawn = 0;
+  criticalHits = 0;
+  scorePlayerNumber.textContent = rivalScore;
+  scoreRivalNumber.textContent = playerScore;
+  round.classList.add("hidden");
+  roundActive = true;
+}
+
+playIcon.addEventListener("click", function () {
+  resetGame();
 });

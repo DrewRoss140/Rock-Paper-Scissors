@@ -1,16 +1,13 @@
 // Overlay DOM Elements
-
 const overlay = document.getElementById("overlay");
 
 // Name Menu DOM Elements
-
 const nameMenu = document.getElementById("name-menu");
 const nameForm = document.getElementById("name-form");
 const playerNameInput = document.getElementById("player-name-input");
 const rivalNameInput = document.getElementById("rival-name-input");
 
 // Post-Game Menu DOM Elements
-
 const postGameMenu = document.getElementById("post-game-menu");
 const postGamePlayerName = document.getElementById("post-game-player-name");
 const postGameResult = document.getElementById("post-game-result");
@@ -49,13 +46,11 @@ const totalDrawPercentNumber = document.getElementById(
 // Main DOM Elements
 
 // Header DOM Elements
-
 const playIcon = document.getElementById("play-icon");
 const statsIcon = document.getElementById("stats-icon");
 const closeIcon = document.getElementById("close-icon");
 
 // Score DOM Elements
-
 const scores = document.getElementById("scores");
 const scorePlayerName = document.getElementById("score-player-name");
 const scorePlayerNumber = document.getElementById("score-player-number");
@@ -63,7 +58,6 @@ const scoreRivalName = document.getElementById("score-rival-name");
 const scoreRivalNumber = document.getElementById("score-rival-number");
 
 // Round DOM Elements
-
 const round = document.getElementById("round");
 const playerPokémonPlayerName = document.getElementById(
   "player-pokémon-player-name"
@@ -117,7 +111,6 @@ const resultRivalPokémonName = document.getElementById(
 );
 
 // Data Structures
-
 const playerNameElements = {
   "player-name-elements": [
     postGamePlayerName,
@@ -224,7 +217,6 @@ const criticalHitIDs = {
 };
 
 // Variables
-
 let playerName;
 let rivalName;
 let suffix;
@@ -256,7 +248,50 @@ let totalWinPercentValue;
 let totalLossPercentValue;
 let totalDrawPercentValue;
 
-//// REFACTOR EVERYTHING BELOW.
+// Event Listeners
+buttons.forEach(handleButtonClick);
+
+closeIcon.addEventListener("click", function () {
+  if (overlay && postGameMenu) {
+    playIcon.classList.remove("hidden");
+    statsIcon.classList.remove("hidden");
+    setTimeout(function () {
+      overlay.classList.replace("active", "inactive");
+    }, 0);
+    setTimeout(function () {
+      overlay.classList.replace("inactive", "disabled");
+      overlay.classList.add("fade-out");
+    }, 1000);
+    setTimeout(function () {
+      overlay.classList.remove("active", "inactive");
+    }, 1500);
+    setTimeout(function () {
+      overlay.classList.replace("fade-out", "hidden");
+      overlay.classList.remove("disabled");
+    }, 2000);
+  }
+});
+
+playIcon.addEventListener("click", function () {
+  resetGame();
+});
+
+statsIcon.addEventListener("click", function () {
+  if (overlay && postGameMenu) {
+    setTimeout(function () {
+      overlay.classList.replace("inactive", "active");
+      overlay.classList.remove("fade-out");
+    }, 0);
+    setTimeout(function () {
+      overlay.classList.add("active");
+    }, 0);
+    setTimeout(function () {
+      overlay.classList.remove("hidden");
+    }, 0);
+  }
+});
+
+// Functions
 
 // Executes on page loading.
 window.onload = function () {
@@ -301,24 +336,6 @@ function assignPlayerNames(elements, name) {
     // Assigns inputted names to their respective DOM elements, with the addition of the relevant suffix (if applicable).
     elements[key].forEach((element) => {
       element.textContent = name + suffix;
-    });
-  });
-}
-
-// Assigns player and rival Pokémon names to their respective DOM elements.
-function assignPokémonNames(pokémonElements, pokémonName, previousPokémon) {
-  Object.keys(pokémonElements).forEach((key) => {
-    suffix = "";
-    if (key.includes("with-exclamation")) {
-      suffix = "!";
-    }
-    // Updates class name of respective element to append selected Pokémon name, for CSS style selection.
-    pokémonElements[key].forEach((element) => {
-      if (previousPokémon) {
-        element.classList.remove(previousPokémon.toLowerCase());
-      }
-      element.classList.add(pokémonName.toLowerCase());
-      element.textContent = pokémonName + suffix;
     });
   });
 }
@@ -400,34 +417,22 @@ function handleButtonClick(buttonID) {
   });
 }
 
-function updateEffectiveness(
-  effectivenessElement,
-  preEffectivenessTextElement,
-  outcome
-) {
-  const roundResults = ["win", "lose", "draw"];
-  roundResults.forEach((className) => {
-    effectivenessElement.classList.remove(className);
+// Assigns player and rival Pokémon names to their respective DOM elements.
+function assignPokémonNames(pokémonElements, pokémonName, previousPokémon) {
+  Object.keys(pokémonElements).forEach((key) => {
+    suffix = "";
+    if (key.includes("with-exclamation")) {
+      suffix = "!";
+    }
+    // Updates class name of respective element to append selected Pokémon name, for CSS style selection.
+    pokémonElements[key].forEach((element) => {
+      if (previousPokémon) {
+        element.classList.remove(previousPokémon.toLowerCase());
+      }
+      element.classList.add(pokémonName.toLowerCase());
+      element.textContent = pokémonName + suffix;
+    });
   });
-  preEffectivenessTextElement.textContent =
-    pokémonAttackEffectiveness[outcome].preEffectivenessText;
-  effectivenessElement.textContent =
-    pokémonAttackEffectiveness[outcome].effectivenessText;
-  effectivenessElement.classList.add(outcome.toLowerCase());
-}
-
-function updateEffectivenessText(roundResult) {
-  const result = roundResultMap[roundResult];
-  updateEffectiveness(
-    playerAttackEffectiveness,
-    playerPreEffectivenessText,
-    result.player
-  );
-  updateEffectiveness(
-    rivalAttackEffectiveness,
-    rivalPreEffectivenessText,
-    result.rival
-  );
 }
 
 function retrieveRandomItem(array) {
@@ -447,7 +452,49 @@ function getRoundResult(playerChoice, rivalChoice) {
       return rivalChoice === "Fire" ? "Win" : "Lose";
   }
 }
-buttons.forEach(handleButtonClick);
+
+function generateCriticalHit(roundResult) {
+  const attackElement = document.getElementById(attackIDs[roundResult]);
+  const criticalHitElement = document.getElementById(
+    criticalHitIDs[roundResult]
+  );
+  if (attackElement && criticalHitElement && Math.random() <= 0.33) {
+    criticalHits += 1;
+    totalCriticalHits += 1;
+    criticalHitElement.classList.remove("disabled");
+    attackElement.insertAdjacentElement("afterend", criticalHitElement);
+  }
+}
+
+function updateEffectivenessText(roundResult) {
+  const result = roundResultMap[roundResult];
+  updateEffectiveness(
+    playerAttackEffectiveness,
+    playerPreEffectivenessText,
+    result.player
+  );
+  updateEffectiveness(
+    rivalAttackEffectiveness,
+    rivalPreEffectivenessText,
+    result.rival
+  );
+}
+
+function updateEffectiveness(
+  effectivenessElement,
+  preEffectivenessTextElement,
+  outcome
+) {
+  const roundResults = ["win", "lose", "draw"];
+  roundResults.forEach((className) => {
+    effectivenessElement.classList.remove(className);
+  });
+  preEffectivenessTextElement.textContent =
+    pokémonAttackEffectiveness[outcome].preEffectivenessText;
+  effectivenessElement.textContent =
+    pokémonAttackEffectiveness[outcome].effectivenessText;
+  effectivenessElement.classList.add(outcome.toLowerCase());
+}
 
 function checkScores() {
   if (playerScore === 5 || rivalScore === 5) {
@@ -505,55 +552,6 @@ function checkScores() {
   }
 }
 
-function generateCriticalHit(roundResult) {
-  const attackElement = document.getElementById(attackIDs[roundResult]);
-  const criticalHitElement = document.getElementById(
-    criticalHitIDs[roundResult]
-  );
-  if (attackElement && criticalHitElement && Math.random() <= 0.33) {
-    criticalHits += 1;
-    totalCriticalHits += 1;
-    criticalHitElement.classList.remove("disabled");
-    attackElement.insertAdjacentElement("afterend", criticalHitElement);
-  }
-}
-
-closeIcon.addEventListener("click", function () {
-  if (overlay && postGameMenu) {
-    playIcon.classList.remove("hidden");
-    statsIcon.classList.remove("hidden");
-    setTimeout(function () {
-      overlay.classList.replace("active", "inactive");
-    }, 0);
-    setTimeout(function () {
-      overlay.classList.replace("inactive", "disabled");
-      overlay.classList.add("fade-out");
-    }, 1000);
-    setTimeout(function () {
-      overlay.classList.remove("active", "inactive");
-    }, 1500);
-    setTimeout(function () {
-      overlay.classList.replace("fade-out", "hidden");
-      overlay.classList.remove("disabled");
-    }, 2000);
-  }
-});
-
-statsIcon.addEventListener("click", function () {
-  if (overlay && postGameMenu) {
-    setTimeout(function () {
-      overlay.classList.replace("inactive", "active");
-      overlay.classList.remove("fade-out");
-    }, 0);
-    setTimeout(function () {
-      overlay.classList.add("active");
-    }, 0);
-    setTimeout(function () {
-      overlay.classList.remove("hidden");
-    }, 0);
-  }
-});
-
 function resetGame() {
   playerScore = 0;
   rivalScore = 0;
@@ -567,7 +565,3 @@ function resetGame() {
   round.classList.add("hidden");
   roundActive = true;
 }
-
-playIcon.addEventListener("click", function () {
-  resetGame();
-});

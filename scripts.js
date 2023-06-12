@@ -111,6 +111,8 @@ const resultRivalPokémonName = document.getElementById(
 );
 
 // Data Structures
+const buttons = ["fire-button", "grass-button", "water-button"];
+
 const playerNameElements = {
   "player-name-elements": [
     postGamePlayerName,
@@ -173,6 +175,8 @@ const pokémonAttacks = {
   ],
 };
 
+const choices = ["Fire", "Grass", "Water"];
+
 const rivalPokémonNameElements = {
   "rival-pokémon-elements": [rivalAttackPokémonName],
   "rival-pokémon-elements-with-exclamation": [
@@ -181,7 +185,47 @@ const rivalPokémonNameElements = {
   ],
 };
 
-const choices = ["Fire", "Grass", "Water"];
+const roundResults = {
+  Win: {
+    score: () => playerScore++,
+    rounds: () => roundsWon++,
+    text: "WON",
+    addClass: "win",
+    removeClasses: ["lose", "draw"],
+  },
+  Lose: {
+    score: () => rivalScore++,
+    rounds: () => roundsLost++,
+    text: "LOST",
+    addClass: "lose",
+    removeClasses: ["win", "draw"],
+  },
+  Draw: {
+    score: null,
+    rounds: () => roundsDrawn++,
+    text: "DREW",
+    addClass: "draw",
+    removeClasses: ["win", "lose"],
+  },
+};
+
+const attackIDs = {
+  Win: "player-attack",
+  Lose: "rival-attack",
+};
+
+const criticalHitIDs = {
+  Win: "player-critical-hit",
+  Lose: "rival-critical-hit",
+};
+
+const roundResultMap = {
+  Win: { player: "Win", rival: "Lose" },
+  Lose: { player: "Lose", rival: "Win" },
+  Draw: { player: "Draw", rival: "Draw" },
+};
+
+const roundResultClasses = ["win", "lose", "draw"];
 
 const pokémonAttackEffectiveness = {
   Draw: {
@@ -196,24 +240,6 @@ const pokémonAttackEffectiveness = {
     preEffectivenessText: "It's",
     effectivenessText: "super effective!",
   },
-};
-
-const roundResultMap = {
-  Win: { player: "Win", rival: "Lose" },
-  Lose: { player: "Lose", rival: "Win" },
-  Draw: { player: "Draw", rival: "Draw" },
-};
-
-const buttons = ["fire-button", "grass-button", "water-button"];
-
-const attackIDs = {
-  Win: "player-attack",
-  Lose: "rival-attack",
-};
-
-const criticalHitIDs = {
-  Win: "player-critical-hit",
-  Lose: "rival-critical-hit",
 };
 
 // Variables
@@ -320,6 +346,20 @@ window.onload = function () {
   });
 };
 
+function resetGame() {
+  playerScore = 0;
+  rivalScore = 0;
+  roundsPlayed = 0;
+  roundsWon = 0;
+  roundsLost = 0;
+  roundsDrawn = 0;
+  criticalHits = 0;
+  scorePlayerNumber.textContent = rivalScore;
+  scoreRivalNumber.textContent = playerScore;
+  round.classList.add("hidden");
+  roundActive = true;
+}
+
 // Assigns inputted player and rival names to their respective DOM elements.
 function assignPlayerNames(elements, name) {
   Object.keys(elements).forEach((key) => {
@@ -342,79 +382,59 @@ function assignPlayerNames(elements, name) {
 
 function handleButtonClick(buttonID) {
   const button = document.getElementById(buttonID);
-  button.addEventListener("click", function () {
-    if (
-      scores.classList.contains("hidden") ||
-      round.classList.contains("hidden")
-    ) {
-      scores.classList.remove("hidden");
-      round.classList.remove("hidden");
-    }
-  });
-  button.addEventListener("click", function () {
-    if (!roundActive) return;
-    const criticalHitElements = document.getElementsByClassName("critical-hit");
-    for (let i = 0; i < criticalHitElements.length; i++) {
-      criticalHitElements[i].classList.add("disabled");
-    }
-    roundsPlayed++;
-    const playerChoice = button.querySelector("img").alt;
-    playerPreviousPokémon = playerPokémon;
-    playerPokémon = pokémon[playerChoice];
-    assignPokémonNames(
-      playerPokémonNameElements,
-      playerPokémon,
-      playerPreviousPokémon
+  button.addEventListener("click", displayScoresAndRound);
+  button.addEventListener("click", playRound);
+}
+
+function displayScoresAndRound() {
+  if (scores.classList.contains("hidden")) {
+    scores.classList.remove("hidden");
+  }
+  if (round.classList.contains("hidden")) {
+    round.classList.remove("hidden");
+  }
+}
+
+function playRound() {
+  if (!roundActive) return;
+  disableCriticalHitElements();
+  roundsPlayed++;
+  const playerChoice = handlePlayerTurn(this);
+  handleRivalTurn();
+  const roundResult = getRoundResult(playerChoice, rivalChoice);
+  handleRoundResult(roundResult);
+  generateCriticalHit(roundResult);
+  updateEffectivenessText(roundResult);
+  checkScores();
+  scorePlayerNumber.textContent = playerScore;
+  scoreRivalNumber.textContent = rivalScore;
+}
+
+function disableCriticalHitElements() {
+  const criticalHitElements = document.getElementsByClassName("critical-hit");
+  for (let i = 0; i < criticalHitElements.length; i++) {
+    criticalHitElements[i].classList.add("disabled");
+  }
+}
+
+function handlePlayerTurn(button) {
+  const playerChoice = button.querySelector("img").alt;
+  playerPreviousPokémon = playerPokémon;
+  playerPokémon = pokémon[playerChoice];
+  assignPokémonNames(
+    playerPokémonNameElements,
+    playerPokémon,
+    playerPreviousPokémon
+  );
+  playerPokémonAttack = retrieveRandomItem(pokémonAttacks[playerChoice]);
+  playerAttackPlayerPokémonAttack.textContent = `${playerPokémonAttack}!`;
+  if (playerPreviousPokémon) {
+    playerAttackPlayerPokémonAttack.classList.remove(
+      playerPreviousPokémon.toLowerCase()
     );
-    playerPokémonAttack = retrieveRandomItem(pokémonAttacks[playerChoice]);
-    playerAttackPlayerPokémonAttack.textContent = `${playerPokémonAttack}!`;
-    if (playerPreviousPokémon) {
-      playerAttackPlayerPokémonAttack.classList.remove(
-        playerPreviousPokémon.toLowerCase()
-      );
-    }
-    playerAttackPlayerPokémonAttack.classList.add(playerPokémon.toLowerCase());
-    rivalChoice = retrieveRandomItem(choices);
-    rivalPreviousPokémon = rivalPokémon;
-    rivalPokémon = pokémon[rivalChoice];
-    assignPokémonNames(
-      rivalPokémonNameElements,
-      rivalPokémon,
-      rivalPreviousPokémon
-    );
-    rivalPokémonAttack = retrieveRandomItem(pokémonAttacks[rivalChoice]);
-    rivalAttackRivalPokémonAttack.textContent = `${rivalPokémonAttack}!`;
-    if (rivalPreviousPokémon) {
-      rivalAttackRivalPokémonAttack.classList.remove(
-        rivalPreviousPokémon.toLowerCase()
-      );
-    }
-    rivalAttackRivalPokémonAttack.classList.add(rivalPokémon.toLowerCase());
-    roundResult = getRoundResult(playerChoice, rivalChoice);
-    if (roundResult === "Win") {
-      playerScore += 1;
-      roundsWon += 1;
-      resultRoundResult.textContent = "WON";
-      resultRoundResult.classList.remove("lose", "draw");
-      resultRoundResult.classList.add("win");
-    } else if (roundResult === "Lose") {
-      rivalScore += 1;
-      roundsLost += 1;
-      resultRoundResult.textContent = "LOST";
-      resultRoundResult.classList.remove("win", "draw");
-      resultRoundResult.classList.add("lose");
-    } else {
-      roundsDrawn += 1;
-      resultRoundResult.textContent = "DREW";
-      resultRoundResult.classList.remove("win", "lose");
-      resultRoundResult.classList.add("draw");
-    }
-    generateCriticalHit(roundResult);
-    updateEffectivenessText(roundResult);
-    checkScores();
-    scorePlayerNumber.textContent = playerScore;
-    scoreRivalNumber.textContent = rivalScore;
-  });
+  }
+  playerAttackPlayerPokémonAttack.classList.add(playerPokémon.toLowerCase());
+  return playerChoice;
 }
 
 // Assigns player and rival Pokémon names to their respective DOM elements.
@@ -439,18 +459,32 @@ function retrieveRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
-function getRoundResult(playerChoice, rivalChoice) {
-  if (playerChoice === rivalChoice) {
-    return "Draw";
+function handleRivalTurn() {
+  rivalChoice = retrieveRandomItem(choices);
+  rivalPreviousPokémon = rivalPokémon;
+  rivalPokémon = pokémon[rivalChoice];
+  assignPokémonNames(
+    rivalPokémonNameElements,
+    rivalPokémon,
+    rivalPreviousPokémon
+  );
+  rivalPokémonAttack = retrieveRandomItem(pokémonAttacks[rivalChoice]);
+  rivalAttackRivalPokémonAttack.textContent = `${rivalPokémonAttack}!`;
+  if (rivalPreviousPokémon) {
+    rivalAttackRivalPokémonAttack.classList.remove(
+      rivalPreviousPokémon.toLowerCase()
+    );
   }
-  switch (playerChoice) {
-    case "Fire":
-      return rivalChoice === "Grass" ? "Win" : "Lose";
-    case "Grass":
-      return rivalChoice === "Water" ? "Win" : "Lose";
-    case "Water":
-      return rivalChoice === "Fire" ? "Win" : "Lose";
-  }
+  rivalAttackRivalPokémonAttack.classList.add(rivalPokémon.toLowerCase());
+}
+
+function handleRoundResult(roundResult) {
+  const result = roundResults[roundResult];
+  if (result.score) result.score();
+  result.rounds();
+  resultRoundResult.textContent = result.text;
+  resultRoundResult.classList.remove(...result.removeClasses);
+  resultRoundResult.classList.add(result.addClass);
 }
 
 function generateCriticalHit(roundResult) {
@@ -463,6 +497,20 @@ function generateCriticalHit(roundResult) {
     totalCriticalHits += 1;
     criticalHitElement.classList.remove("disabled");
     attackElement.insertAdjacentElement("afterend", criticalHitElement);
+  }
+}
+
+function getRoundResult(playerChoice, rivalChoice) {
+  if (playerChoice === rivalChoice) {
+    return "Draw";
+  }
+  switch (playerChoice) {
+    case "Fire":
+      return rivalChoice === "Grass" ? "Win" : "Lose";
+    case "Grass":
+      return rivalChoice === "Water" ? "Win" : "Lose";
+    case "Water":
+      return rivalChoice === "Fire" ? "Win" : "Lose";
   }
 }
 
@@ -483,17 +531,17 @@ function updateEffectivenessText(roundResult) {
 function updateEffectiveness(
   effectivenessElement,
   preEffectivenessTextElement,
-  outcome
+  result
 ) {
-  const roundResults = ["win", "lose", "draw"];
-  roundResults.forEach((className) => {
+  roundResultClasses.forEach((className) => {
     effectivenessElement.classList.remove(className);
   });
+
   preEffectivenessTextElement.textContent =
-    pokémonAttackEffectiveness[outcome].preEffectivenessText;
+    pokémonAttackEffectiveness[result].preEffectivenessText;
   effectivenessElement.textContent =
-    pokémonAttackEffectiveness[outcome].effectivenessText;
-  effectivenessElement.classList.add(outcome.toLowerCase());
+    pokémonAttackEffectiveness[result].effectivenessText;
+  effectivenessElement.classList.add(result.toLowerCase());
 }
 
 function checkScores() {
@@ -550,18 +598,4 @@ function checkScores() {
     totalDrawPercentNumber.textContent = `${totalDrawPercentValue}%`;
     roundActive = false;
   }
-}
-
-function resetGame() {
-  playerScore = 0;
-  rivalScore = 0;
-  roundsPlayed = 0;
-  roundsWon = 0;
-  roundsLost = 0;
-  roundsDrawn = 0;
-  criticalHits = 0;
-  scorePlayerNumber.textContent = rivalScore;
-  scoreRivalNumber.textContent = playerScore;
-  round.classList.add("hidden");
-  roundActive = true;
 }

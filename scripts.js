@@ -395,6 +395,7 @@ function displayScoresAndRound() {
   }
 }
 
+// Handles round functionality.
 function playRound() {
   if (!roundActive) return;
   disableCriticalHitElements();
@@ -410,6 +411,7 @@ function playRound() {
   scoreRivalNumber.textContent = rivalScore;
 }
 
+// Disables critical hit elements.
 function disableCriticalHitElements() {
   const criticalHitElements = document.getElementsByClassName("critical-hit");
   for (let i = 0; i < criticalHitElements.length; i++) {
@@ -417,6 +419,7 @@ function disableCriticalHitElements() {
   }
 }
 
+// Handles player turn.
 function handlePlayerTurn(button) {
   const playerChoice = button.querySelector("img").alt;
   playerPreviousPokémon = playerPokémon;
@@ -426,6 +429,7 @@ function handlePlayerTurn(button) {
     playerPokémon,
     playerPreviousPokémon
   );
+  // Select a random attack for the chosen Pokémon.
   playerPokémonAttack = retrieveRandomItem(pokémonAttacks[playerChoice]);
   playerAttackPlayerPokémonAttack.textContent = `${playerPokémonAttack}!`;
   if (playerPreviousPokémon) {
@@ -455,10 +459,12 @@ function assignPokémonNames(pokémonElements, pokémonName, previousPokémon) {
   });
 }
 
+// This function retrieves a random item from the provided array.
 function retrieveRandomItem(array) {
   return array[Math.floor(Math.random() * array.length)];
 }
 
+// Handles rival turn.
 function handleRivalTurn() {
   rivalChoice = retrieveRandomItem(choices);
   rivalPreviousPokémon = rivalPokémon;
@@ -468,6 +474,7 @@ function handleRivalTurn() {
     rivalPokémon,
     rivalPreviousPokémon
   );
+  // Select a random attack for the chosen Pokémon.
   rivalPokémonAttack = retrieveRandomItem(pokémonAttacks[rivalChoice]);
   rivalAttackRivalPokémonAttack.textContent = `${rivalPokémonAttack}!`;
   if (rivalPreviousPokémon) {
@@ -478,6 +485,7 @@ function handleRivalTurn() {
   rivalAttackRivalPokémonAttack.classList.add(rivalPokémon.toLowerCase());
 }
 
+// Handles handleRoundResult input.
 function handleRoundResult(roundResult) {
   const result = roundResults[roundResult];
   if (result.score) result.score();
@@ -487,8 +495,10 @@ function handleRoundResult(roundResult) {
   resultRoundResult.classList.add(result.addClass);
 }
 
+// Generate criticalHit flavour text.
 function generateCriticalHit(roundResult) {
   const attackElement = document.getElementById(attackIDs[roundResult]);
+  // Retrieve the corresponding attack element and critical hit element based on the round result.
   const criticalHitElement = document.getElementById(
     criticalHitIDs[roundResult]
   );
@@ -500,6 +510,7 @@ function generateCriticalHit(roundResult) {
   }
 }
 
+// Determines roundResult, based on player and rival choice.
 function getRoundResult(playerChoice, rivalChoice) {
   if (playerChoice === rivalChoice) {
     return "Draw";
@@ -514,6 +525,7 @@ function getRoundResult(playerChoice, rivalChoice) {
   }
 }
 
+// Calls updateEffectiveness.
 function updateEffectivenessText(roundResult) {
   const result = roundResultMap[roundResult];
   updateEffectiveness(
@@ -528,6 +540,7 @@ function updateEffectivenessText(roundResult) {
   );
 }
 
+// Dynamically updates effective elements.
 function updateEffectiveness(
   effectivenessElement,
   preEffectivenessTextElement,
@@ -536,7 +549,6 @@ function updateEffectiveness(
   roundResultClasses.forEach((className) => {
     effectivenessElement.classList.remove(className);
   });
-
   preEffectivenessTextElement.textContent =
     pokémonAttackEffectiveness[result].preEffectivenessText;
   effectivenessElement.textContent =
@@ -544,6 +556,7 @@ function updateEffectiveness(
   effectivenessElement.classList.add(result.toLowerCase());
 }
 
+// Checks whether playerScore or rivalScore is equal to 5.
 function checkScores() {
   if (playerScore === 5 || rivalScore === 5) {
     setTimeout(function () {
@@ -552,7 +565,6 @@ function checkScores() {
     setTimeout(function () {
       postGameMenu.classList.replace("hidden", "active");
     }, 2000);
-
     if (playerScore > rivalScore) {
       postGameResult.textContent = "WON";
       postGameResult.classList.remove("lose");
